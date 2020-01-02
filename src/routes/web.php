@@ -15,7 +15,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::resource('automovel','AutomovelController')->middleware('auth');
+Route::resource('automovel','AutomovelController');
+
+// ->middleware('auth');
 Route::resource('filial','FilialController');
 Route::resource('funcionario','FuncionarioController');
 

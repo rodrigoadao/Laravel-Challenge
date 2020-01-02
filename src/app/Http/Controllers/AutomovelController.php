@@ -25,7 +25,7 @@ class AutomovelController extends Controller
     }
 
     public function create(){
-        return 'Exibindo o form de cadastro de um novo produto';
+        return view('automovel.create');
     }
 
     public function edit($id){

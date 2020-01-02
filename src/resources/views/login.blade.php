@@ -2,15 +2,14 @@
 
 @section('title','Login')
 
-
 @section('content')
     <div class="modal-dialog text-center">
-        <div class="col-sm-11 main-section">
+        <div class="col-md-12 main-section">
             <div class="modal-content">
-                <div class="col-12 user-img">
+                <div class="col-md-12 user-img">
                     <img src="img/user.png">
                 </div>
-                <div class="col-12 form-input">
+                <div class="col-md-12 form-input">
                     <div class="form-title">
                         <h1>Entrar</h1>
                     </div>

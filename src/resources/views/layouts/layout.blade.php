@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') - Desafio PHP</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
-
     @stack('styles')
 </head>
 <body>
+
+    
     <div class="container">
         @yield('content')
     </div>
-
     <script src="{{ asset('js/app.js') }}" type="text/js"></script>
     @stack('scripts')
 </body>

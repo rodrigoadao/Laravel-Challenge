@@ -23,7 +23,7 @@ class FilialController extends Controller
      */
     public function create()
     {
-        //
+        return view('filial.create');
     }
 
     /**
