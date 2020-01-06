@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Automovel;
 
 class AutomovelController extends Controller
 {
@@ -17,7 +17,8 @@ class AutomovelController extends Controller
 
 
     public function index(){
-        return view('automovel.index');
+        $automoveis = Automovel::all();
+        return view('automovel.index', compact('automoveis'));
     }
 
     public function show($id){

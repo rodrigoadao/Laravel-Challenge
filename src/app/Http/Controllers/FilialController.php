@@ -13,7 +13,7 @@ class FilialController extends Controller
      */
     public function index()
     {
-        //
+        return view('filial.index');
     }
 
     /**
@@ -79,6 +79,6 @@ class FilialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

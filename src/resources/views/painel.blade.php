@@ -18,9 +18,9 @@
           </header>
           <ul>
             <li><span>PAINEL ADMIN.</span></li>
-            <li><a>Funcionário</a></li>
-            <li><a>Automovél</a></li>
-            <li><a>Filial</a></li>
+          <li><a href="{{ 'funcionario' }}">Funcionário</a></li>
+            <li><a href="{{ 'automovel' }}">Automovél</a></li>
+            <li><a href="{{ 'filial' }}">Filial</a></li>
           </ul>
         </nav>
         <main>
