@@ -4,11 +4,12 @@
 
 @section('content')
 <div class="modal-content">
-    <form action="" method="post">
+<form action="{{ route('automovel.store')}}" method="post">
         <div class="form-title">
             <h1>Cadastrar Novo Automovel</h1>
         </div>
         <div class="form-group">
+            @csrf
             <div class="row">
                 <div class="col-4">  
                     <label for="nome">Nome: </label>
@@ -47,7 +48,7 @@
             </div>
         </div>
         <div class="row justify-content-end">
-            <div class="col-3 mr-3">
+            <div class="col-2 mr-3">
                 <button type="submit" class="btn btn-sucess form-control">Cadastrar</button>
             </div>
         </div>

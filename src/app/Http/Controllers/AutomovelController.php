@@ -17,7 +17,7 @@ class AutomovelController extends Controller
 
 
     public function index(){
-        return 'TESTE CORRETO';
+        return view('automovel.index');
     }
 
     public function show($id){

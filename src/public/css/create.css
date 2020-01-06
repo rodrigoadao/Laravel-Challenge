@@ -22,10 +22,7 @@ body{
     letter-spacing: 2px;
     padding-left: 25px;
 }
-.form-input button{
-    width: 20%;
-    margin: 10px 0px 20px;
-}
+
 .btn-sucess{
     background-color: #2c2c2c;
     color: white;
