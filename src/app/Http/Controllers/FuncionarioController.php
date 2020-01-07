@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Models\Funcionario;
+use App\Models\Filial;
 
 class FuncionarioController extends Controller
 {
@@ -11,9 +12,20 @@ class FuncionarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $request;
+    protected $filial;
+
+    public function __construct(Request $request,Filial $filial,Funcionario $funcionario)
+    {
+        $this->request = $request;
+        $this->filial = $filial;
+        $this->funcionario = $funcionario;
+    }
     public function index()
     {
-        return view('funcionario.index');
+        $funcionarios = $this->funcionario::all();
+        
+        return view('funcionario.index', compact('funcionarios'));
     }
 
     /**
@@ -23,7 +35,8 @@ class FuncionarioController extends Controller
      */
     public function create()
     {
-        return view('funcionario.create');
+        $filiais = $this->filial::all();
+        return view('funcionario.create',compact('filiais'));
     }
 
     /**
@@ -32,9 +45,14 @@ class FuncionarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $dataForm = $this->request->all();
+        $insert = $this->funcionario->create($dataForm);
+        if($insert)
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.create');
     }
 
     /**

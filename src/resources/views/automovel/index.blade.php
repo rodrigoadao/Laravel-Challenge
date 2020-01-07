@@ -21,19 +21,19 @@
             <th scope="col">Cor</th>
             <th scope="col">Nº de chassi</th>
             <th scope="col">Categoria</th>
-            <th scope="col">Comandos</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
           @foreach ( $automoveis as $automovel )
               <tr>
                 <th scope="row">{{ $automovel->id }}</th>
-                <th>{{ $automovel->nome }}</th>
-                <th>{{ $automovel-> }}</th>
-                <th>{{ $automovel-> }}</th>
-                <th>{{ $automovel-> }}</th>
-                <th>{{ $automovel-> }}</th>
-                <th>{{ $automovel-> }}</th>
+                <td>{{ $automovel->nome }}</td>
+                <td>{{ $automovel->ano}}</td>
+                <td>{{ $automovel->modelo }}</td>
+                <td>{{ $automovel->cor }}</td>
+                <td>{{ $automovel->chassi }}</td>
+                <td>{{ $automovel->categoria }}</td>
                 <td class="img-commands">
                   <a href=""><img src="../img/update.svg" alt="update"></a>
                   <a href=""><img src="../img/delete.svg" alt="delete"></a>

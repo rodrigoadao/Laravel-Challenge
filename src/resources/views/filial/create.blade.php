@@ -4,10 +4,11 @@
 
 @section('content')
 <div class="modal-content">
-    <form action="" method="post">
-        <div class="form-title">
-            <h1>Cadastrar Novo Filial</h1>
-        </div>
+    <div class="form-title">
+        <h1>Cadastrar Nova Filial</h1>
+    </div>
+    <form action="{{ route('filial.store')}}" method="post">
+        @csrf
         <div class="form-group">
             <div class="row">
                 <div class="col-md-4">  
@@ -19,8 +20,8 @@
                     <input type="text"  class="form-control" name="endereco" id="endereco">
                 </div>
                 <div class="col-md-4">
-                    <label for="estado">Estado: </label>
-                    <input type="text"  class="form-control" name="estado" id="estado">
+                    <label for="ie">Insc. Estadual: </label>
+                    <input type="text"  class="form-control" name="ie" id="estado">
                 </div>
             </div>
             <div class="row mt-4">

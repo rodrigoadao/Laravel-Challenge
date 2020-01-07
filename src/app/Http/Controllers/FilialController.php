@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Filial;
 use Illuminate\Http\Request;
 
 class FilialController extends Controller
@@ -11,9 +11,19 @@ class FilialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     protected $filial;
+     protected $request;
+
+     public function __construct(Request $request,Filial $filial)
+     {
+        $this->request = $request;
+        $this->filial = $filial;
+     }
+
     public function index()
     {
-        return view('filial.index');
+        $filiais = $this->filial::all();
+        return view('filial.index',compact('filiais'));
     }
 
     /**
@@ -32,9 +42,14 @@ class FilialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $dataForm = $this->request->all();
+        $insert = $this->filial->create($dataForm);
+        if($insert)
+            return redirect()->route('filial.index');
+        else
+            return redirect()->route('filial.create');
     }
 
     /**

@@ -18,7 +18,15 @@ class Funcionario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        //'name', 'email', 'password',
+        'filial_id',
+        'nome',
+        'endereco',
+        'dtNacimento',
+        'sexo',
+        'cpf',
+        'cargo',
+        'salario',
+        'situacao'
     ];
 
     /**
@@ -38,4 +46,5 @@ class Funcionario extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

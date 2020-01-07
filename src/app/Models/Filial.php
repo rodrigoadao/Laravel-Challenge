@@ -8,4 +8,7 @@ class Filial extends Model
 {
     protected $table = 'filial';
     
+    protected $fillable = [
+        'nome', 'endereco', 'ie' ,'cnpj'
+    ];
 }

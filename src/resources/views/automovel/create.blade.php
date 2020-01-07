@@ -30,24 +30,28 @@
                     <input type="text"  class="form-control" name="cor" id="cor">
                 </div>
                 <div class="col-4">
-                    <label for="numeroChassi">Numero Chassi: </label>
-                    <input type="text"  class="form-control" name="numeroChassi" id="numeroChassi">
+                    <label for="chassi">Numero Chassi: </label>
+                    <input type="text"  class="form-control" name="chassi" id="chassi">
                 </div>
                 <div class="col-4">
                     <label for="categoria">Categoria: </label>
                     <select name="categoria"  class="form-control" id="categoria">
-                        <option value="">Entrada</option>
-                        <option value="">Hatch pequeno</option>
-                        <option value="">Hatch m�dio</option>
-                        <option value="">Sed� m�dio</option>
-                        <option value="">Sed� grande</option>
-                        <option value="">SUV</option>
-                        <option value="">Pick-ups</option>
+                        @foreach ($categorias as $categoria)
+                            <option value="{{ $categoria }}">{{ $categoria }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-4">
+                    <label for="filial">Filial: </label>
+                    <select name="filial_id"  class="form-control" id="filial">
+                    @foreach ($filiais as $filial)
+                        <option value="{{ $filial->id }}">{{ $filial->nome }}</option>
+                    @endforeach
                     </select>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-md-end mt-5">
+        <div class="row justify-content-md-end">
             <div class="col-2 mr-3">
                 <a href="{{ route('automovel.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
@@ -61,13 +65,3 @@
 @push('styles')
     <link href="../css/create.css" rel="stylesheet" type="text/css">
 @endpush
-
-
-
-{{-- <div class="modal-dialog col-lg-12 text-center">
-    <div class="col-lg-12 main-section">
-        <div class="col-lg-12 form-input">
-            
-        </div>
-    </div>
-</div> --}}

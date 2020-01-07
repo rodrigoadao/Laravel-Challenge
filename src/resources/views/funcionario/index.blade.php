@@ -11,7 +11,7 @@
         </div>
         <hr>
         <table class="table">
-            <caption>Lista de Automovéis</caption>
+            <caption>Lista de Funcionarios</caption>
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
@@ -23,34 +23,29 @@
                 <th scope="col">Cargo</th>
                 <th scope="col">Salário</th>
                 <th scope="col">Situação</th>
-                <th scope="col">Comandos</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td class="img-commands">
-                    <a href=""><img src="../img/update.svg" alt=""></a>
-                    <a href=""><img src="../img/delete.svg" alt=""></a>
-                    <a href=""><img src="../img/enable.svg" alt=""></a>
-                    <a href=""><img src="../img/disable.svg" alt=""></a>"
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              @foreach ( $funcionarios as $funcionario )
+                <tr>
+                  <th scope="row">{{ $funcionario->id }}</th>
+                  <td>{{ $funcionario->nome }}</td>
+                  <td>{{ $funcionario->dtNacimento}}</td>
+                  <td>{{ $funcionario->sexo }}</td>
+                  <td>{{ $funcionario->cpf }}</td>
+                  <td>{{ $funcionario->endereco }}</td>
+                  <td>{{ $funcionario->cargo }}</td>
+                  <td>{{ $funcionario->salario }}</td>
+                  <td>{{ $funcionario->situacao }}</td>
+                  <td class="img-commands">
+                      <a href=""><img src="../img/update.svg" alt=""></a>
+                      <a href=""><img src="../img/delete.svg" alt=""></a>
+                      <a href=""><img src="../img/enable.svg" alt=""></a>
+                      <a href=""><img src="../img/disable.svg" alt=""></a>"
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
     </div>

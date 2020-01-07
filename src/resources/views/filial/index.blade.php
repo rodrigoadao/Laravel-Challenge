@@ -1,6 +1,6 @@
 @extends('painel')
 
-@section('titulo','Automoveis Cadastrados')
+@section('titulo','Filiais Cadastrados')
 
 @section('content')
     <div class="modal-content">
@@ -11,7 +11,7 @@
         </div>
         <hr>
         <table class="table">
-            <caption>Lista de Automovéis</caption>
+            <caption>Lista de Filiais</caption>
             <thead class="table-dark">
               <tr>
                 <th scope="col">#</th>
@@ -19,49 +19,25 @@
                 <th scope="col">Endereço</th>
                 <th scope="col">IE</th>
                 <th scope="col">CNPJ</th>
-                <th scope="col">Comandos</th>
+                <th scope="col">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>Otto</td>
-                <td class="img-commands">
-                    <a href=""><img src="../img/update.svg" alt=""></a>
-                    <a href=""><img src="../img/delete.svg" alt=""></a>
-                    <a href=""><img src="../img/enable.svg" alt=""></a>
-                    <a href=""><img src="../img/disable.svg" alt=""></a>"
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Thornton</td>
-                <td class="img-commands">
-                  <a href=""><img src="../img/update.svg" alt=""></a>
-                  <a href=""><img src="../img/delete.svg" alt=""></a>
-                  <a href=""><img src="../img/enable.svg" alt=""></a>
-                  <a href=""><img src="../img/disable.svg" alt=""></a>"
-              </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>the Bird</td>
-                <td class="img-commands">
-                  <a href=""><img src="../img/update.svg" alt=""></a>
-                  <a href=""><img src="../img/delete.svg" alt=""></a>
-                  <a href=""><img src="../img/enable.svg" alt=""></a>
-                  <a href=""><img src="../img/disable.svg" alt=""></a>"
-              </td>
-              </tr>
+              @foreach ( $filiais as $filial )
+                <tr>
+                  <td scope="row">{{ $filial->id }}</td>
+                  <td>{{ $filial->nome }}</td>
+                  <td>{{ $filial->endereco}}</td>
+                  <td>{{ $filial->ie }}</td>
+                  <td>{{ $filial->cnpj }}</td>
+                  <td class="img-commands">
+                      <a href=""><img src="../img/update.svg" alt=""></a>
+                      <a href=""><img src="../img/delete.svg" alt=""></a>
+                      <a href=""><img src="../img/enable.svg" alt=""></a>
+                      <a href=""><img src="../img/disable.svg" alt=""></a>"
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
     </div>
