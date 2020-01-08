@@ -11,4 +11,5 @@ class Filial extends Model
     protected $fillable = [
         'nome', 'endereco', 'ie' ,'cnpj'
     ];
+
 }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\FilialFormRequest;
 use App\Models\Filial;
 use Illuminate\Http\Request;
 
@@ -14,16 +16,16 @@ class FilialController extends Controller
      protected $filial;
      protected $request;
 
-     public function __construct(Request $request,Filial $filial)
+     public function __construct(Filial $filial)
      {
-        $this->request = $request;
         $this->filial = $filial;
      }
 
     public function index()
     {
         $filiais = $this->filial::all();
-        return view('filial.index',compact('filiais'));
+        $title = "Cadastro Filial";
+        return view('filial.index',compact('filiais','title'));
     }
 
     /**
@@ -33,7 +35,8 @@ class FilialController extends Controller
      */
     public function create()
     {
-        return view('filial.create');
+        $title = "Cadastrar Filial";
+        return view('filial.create-edit',compact('title'));
     }
 
     /**
@@ -42,14 +45,14 @@ class FilialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(FilialFormRequest $request)
     {
-        $dataForm = $this->request->all();
+        $dataForm = $request->all();
         $insert = $this->filial->create($dataForm);
         if($insert)
             return redirect()->route('filial.index');
         else
-            return redirect()->route('filial.create');
+            return redirect()->route('filial.create-edit');
     }
 
     /**
@@ -60,7 +63,11 @@ class FilialController extends Controller
      */
     public function show($id)
     {
-        //
+        //$filial = $this->filial->where('id',$id)->get();
+        $filial = $this->filial->find($id);
+        $title = "Filial: {$filial->nome}";
+
+        return view('filial.show', compact('filial','title'));
     }
 
     /**
@@ -71,7 +78,9 @@ class FilialController extends Controller
      */
     public function edit($id)
     {
-        //
+        $filial = $this->filial->find($id);
+        $title = "Editar {$filial->nome}";
+        return view('filial.create-edit',compact('title','filial'));
     }
 
     /**
@@ -81,9 +90,17 @@ class FilialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FilialFormRequest $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $filial = $this->filial->find($id);
+        $update = $filial->update($dataForm);
+
+        if( $update )
+            return redirect()->route('filial.index');
+        else
+            return redirect()->route('filial.edit',$id)->with(['errors' => 'Falha ao editar']);
+        
     }
 
     /**
@@ -94,6 +111,14 @@ class FilialController extends Controller
      */
     public function destroy($id)
     {
+        $filial = $this->filial->find($id);
+
+        $delete = $filial->delete();
         
+        if($delete)
+            return redirect()->route('filial.index');
+        else
+            return redirect()->route('filial.index')->with(['errors' => 'Falha ao deletar']);
     }
+
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title') - Desafio PHP</title>
+    <title>{{ $title }} Desafio PHP</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/painel.css') }}" rel="stylesheet" type="text/css">
     @stack('styles')
@@ -18,12 +18,13 @@
           </header>
           <ul>
             <li><span>PAINEL ADMIN.</span></li>
-          <li><a href="{{ 'funcionario' }}">Funcionário</a></li>
-            <li><a href="{{ 'automovel' }}">Automovél</a></li>
-            <li><a href="{{ 'filial' }}">Filial</a></li>
+          <li><a href="{{ route('funcionario.index') }}">Funcionário</a></li>
+            <li><a href="{{ route('automovel.index') }}">Automovél</a></li>
+            <li><a href="{{ route('filial.index') }}">Filial</a></li>
           </ul>
         </nav>
         <main>
+            <h1>@yield('titulo')</h1>
             <div class="flex-grid">
                 @yield('content')
             </div>
@@ -32,4 +33,4 @@
     <script src="{{ asset('js/app.js') }}" type="text/js"></script>
     @stack('scripts')
 </body>
-</html>
+</html>+
