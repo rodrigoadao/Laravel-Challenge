@@ -26,7 +26,7 @@
         </thead>
         <tbody>
           @foreach ( $automoveis as $automovel )
-              <tr>
+              <tr row >
                 <th scope="row">{{ $automovel->id }}</th>
                 <td>{{ $automovel->nome }}</td>
                 <td>{{ $automovel->ano}}</td>
@@ -35,10 +35,10 @@
                 <td>{{ $automovel->chassi }}</td>
                 <td>{{ $automovel->categoria }}</td>
                 <td class="img-commands">
-                  <a href=""><img src="../img/update.svg" alt="update"></a>
+                  <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" alt="update"></a>
                   <a href=""><img src="../img/delete.svg" alt="delete"></a>
                   <a href=""><img src="../img/enable.svg" alt="enable"></a>
-                  <a href=""><img src="../img/disable.svg" alt="disable"></a>"
+                  <a href=""><img src="../img/disable.svg" alt="disable"></a>
               </td>
               </tr>
           @endforeach
@@ -47,5 +47,5 @@
 </div>
 @endsection
 @push('styles')
-    <link href="../css/index.css" rel="stylesheet" type="text/css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
 @endpush

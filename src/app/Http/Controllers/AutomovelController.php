@@ -1,18 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\AutomovelFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Automovel;
 use App\Models\Filial;
 
 class AutomovelController extends Controller
 {
-    protected $request;
     protected $filial;
     protected $automovel;
-    public function __construct(Request $request,Automovel $automovel,Filial $filial)
+
+    public function __construct(Automovel $automovel,Filial $filial)
     {
-        $this->request = $request;
         $this->filial = $filial;
         $this->automovel = $automovel;
         // $this->middleware('auth')->only(['create','store']);
@@ -22,7 +23,8 @@ class AutomovelController extends Controller
 
     public function index(){
         $automoveis = $this->automovel::all();
-        return view('automovel.index', compact('automoveis'));
+        $title = "Listagem de Automovéis";
+        return view('automovel.index', compact('automoveis','title'));
     }
 
     public function show($id){
@@ -30,18 +32,25 @@ class AutomovelController extends Controller
     }
 
     public function create(){
+
         $categorias = ['Entrada','Hatch pequeno','Hatch médio','Sedã médio', 'Sedã grande','SUV','Pick-ups'];
+        $title = "Cadastro Automóvel";
         $filiais = $this->filial->all();
-        return view('automovel.create', compact('filiais','categorias'));
+        return view('automovel.create-edit', compact('filiais','categorias','title'));
     }
 
     public function edit($id){
-        return "Form para editar o produto: {$id}";
+        $automovel = $this->automovel->find($id);
+        $title = "Editar {$automovel->nome}";
+
+        $categorias = ['Entrada','Hatch pequeno','Hatch médio','Sedã médio', 'Sedã grande','SUV','Pick-ups'];
+        $filiais = $this->filial->all();
+        return view('automovel.create-edit',compact('title','automovel','categorias','filiais'));
     }
 
-    public function store(){
+    public function store(AutomovelFormRequest $request){
         
-        $dataForm = $this->request->all();
+        $dataForm = $request->all();
         $insert = $this->automovel->create($dataForm);
         if($insert)
             return redirect()->route('automovel.index');
@@ -49,8 +58,16 @@ class AutomovelController extends Controller
             return redirect()->route('automovel.create');
     }
 
-    public function update($id){
-        return 'Editando Produto ' + $id;
+    public function update(AutomovelFormRequest $request,$id){
+        
+        $dataForm = $request->all();
+        $automovel = $this->automovel->find($id);
+        $update = $automovel->update($dataForm);
+
+        if( $update )
+            return redirect()->route('automovel.index');
+        else
+            return redirect()->route('automovel.edit',$id)->with(['errors' => 'Falha ao editar']);
     }
 
     public function destroy($id){

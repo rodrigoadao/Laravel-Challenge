@@ -1,6 +1,6 @@
 @extends('painel')
 
-@section('titulo','Automoveis Cadastrados')
+@section('titulo','Funcionarios Cadastrados')
 
 @section('content')
     <div class="modal-content">
@@ -28,7 +28,7 @@
             </thead>
             <tbody>
               @foreach ( $funcionarios as $funcionario )
-                <tr>
+                <tr row>
                   <th scope="row">{{ $funcionario->id }}</th>
                   <td>{{ $funcionario->nome }}</td>
                   <td>{{ $funcionario->dtNacimento}}</td>
@@ -39,10 +39,10 @@
                   <td>{{ $funcionario->salario }}</td>
                   <td>{{ $funcionario->situacao }}</td>
                   <td class="img-commands">
-                      <a href=""><img src="../img/update.svg" alt=""></a>
+                      <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" alt=""></a>
                       <a href=""><img src="../img/delete.svg" alt=""></a>
                       <a href=""><img src="../img/enable.svg" alt=""></a>
-                      <a href=""><img src="../img/disable.svg" alt=""></a>"
+                      <a href=""><img src="../img/disable.svg" alt=""></a>
                   </td>
                 </tr>
               @endforeach
@@ -51,5 +51,5 @@
     </div>
 @endsection
 @push('styles')
-    <link href="../css/index.css" rel="stylesheet" type="text/css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
 @endpush

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\FuncionarioFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Filial;
@@ -15,17 +17,17 @@ class FuncionarioController extends Controller
     protected $request;
     protected $filial;
 
-    public function __construct(Request $request,Filial $filial,Funcionario $funcionario)
+    public function __construct(Filial $filial,Funcionario $funcionario)
     {
-        $this->request = $request;
         $this->filial = $filial;
         $this->funcionario = $funcionario;
     }
     public function index()
     {
         $funcionarios = $this->funcionario::all();
+        $title = 'Listagem do Funcionario';
         
-        return view('funcionario.index', compact('funcionarios'));
+        return view('funcionario.index', compact('funcionarios','title'));
     }
 
     /**
@@ -36,7 +38,8 @@ class FuncionarioController extends Controller
     public function create()
     {
         $filiais = $this->filial::all();
-        return view('funcionario.create',compact('filiais'));
+        $title = 'Cadastrar Funcionario';
+        return view('funcionario.create-edit',compact('filiais','title'));
     }
 
     /**
@@ -45,9 +48,9 @@ class FuncionarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(FuncionarioFormRequest $request)
     {
-        $dataForm = $this->request->all();
+        $dataForm = $request->all();
         $insert = $this->funcionario->create($dataForm);
         if($insert)
             return redirect()->route('funcionario.index');
@@ -74,7 +77,11 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $funcionario = $this->funcionario->find($id);
+        $filiais = $this->filial::all();
+        $title = "Editar {$funcionario->nome}";
+
+        return view('funcionario.create-edit',compact('title','funcionario','filiais'));
     }
 
     /**
@@ -84,9 +91,16 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FuncionarioFormRequest $request, $id)
     {
-        //
+        $dataForm = $request->all();
+        $funcionario = $this->funcionario->find($id);
+        $update = $funcionario->update($dataForm);
+
+        if( $update )
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.edit',$id)->with(['errors' => 'Falha ao editar']);
     }
 
     /**

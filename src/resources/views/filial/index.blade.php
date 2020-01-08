@@ -1,6 +1,6 @@
 @extends('painel')
 
-@section('titulo','Filiais Cadastrados')
+@section('titulo','Filiais Cadastradas')
 
 @section('content')
     <div class="modal-content">
@@ -24,17 +24,18 @@
             </thead>
             <tbody>
               @foreach ( $filiais as $filial )
-                <tr>
+                <tr row >
                   <td scope="row">{{ $filial->id }}</td>
                   <td>{{ $filial->nome }}</td>
                   <td>{{ $filial->endereco}}</td>
                   <td>{{ $filial->ie }}</td>
                   <td>{{ $filial->cnpj }}</td>
                   <td class="img-commands">
-                      <a href=""><img src="../img/update.svg" alt=""></a>
-                      <a href=""><img src="../img/delete.svg" alt=""></a>
+                      <a href="{{ route('filial.show', $filial->id ) }}"><img src="../img/view.svg" alt=""></a>
+                      <a href="{{ route('filial.edit', $filial->id ) }}"><img src="../img/update.svg" alt=""></a>
+                      <a href="{{ route('filial.delete', $filial->id) }}"><img src="../img/delete.svg" alt=""></a>
                       <a href=""><img src="../img/enable.svg" alt=""></a>
-                      <a href=""><img src="../img/disable.svg" alt=""></a>"
+                      <a href=""><img src="../img/disable.svg" alt=""></a>
                   </td>
                 </tr>
               @endforeach
@@ -43,5 +44,5 @@
     </div>
 @endsection
 @push('styles')
-    <link href="../css/index.css" rel="stylesheet" type="text/css">
+    <link href="/css/index.css" rel="stylesheet" type="text/css">
 @endpush
