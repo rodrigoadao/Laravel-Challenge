@@ -26,9 +26,38 @@ table img{
 }
 
 [row]:hover{
-    background-color: #c0c0c0;
+    background-color: #b0e0e6;
     color: black;
 }
 .img-commands{
-    width: 230px;
+    width: 145px;
+}
+
+.img-commandsFunc{
+    width: 180px;
+}
+
+div .paginacao{
+    margin: 0 auto;
+}
+div .paginacao > nav {
+    background-color: white;
+}
+
+.page-link{
+    color: #2c2c2c;
+}
+
+.page-item.active .page-link{
+    background-color: #2c2c2c;
+    color: white;
+    border-color: #2c2c2c;
+}
+
+[disable] {
+    background-color: tomato;
+}
+
+[row][disable]:hover{
+    background-color: tomato;
 }

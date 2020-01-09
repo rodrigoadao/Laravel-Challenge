@@ -4,6 +4,13 @@
 
 @section('content')
     <div class="modal-content">
+      @if ( isset($errors) && count($errors) > 0)
+      <div class="alert alert-danger">
+          @foreach ( $errors->all() as $error)
+              <p>{{ $error }}</p>
+          @endforeach
+      </div>
+      @endif
         <div class="row justify-content-end my-3">
                 <div class="col-2 ">
                 <a href="{{ route('filial.create')}}" class="btn btn-sucess form-control">Novo</a>
@@ -34,13 +41,14 @@
                       <a href="{{ route('filial.show', $filial->id ) }}"><img src="../img/view.svg" alt=""></a>
                       <a href="{{ route('filial.edit', $filial->id ) }}"><img src="../img/update.svg" alt=""></a>
                       <a href="{{ route('filial.delete', $filial->id) }}"><img src="../img/delete.svg" alt=""></a>
-                      <a href=""><img src="../img/enable.svg" alt=""></a>
-                      <a href=""><img src="../img/disable.svg" alt=""></a>
                   </td>
                 </tr>
               @endforeach
             </tbody>
           </table>
+          <div class="paginacao">
+            {!! $filiais->links() !!}
+          </div>
     </div>
 @endsection
 @push('styles')

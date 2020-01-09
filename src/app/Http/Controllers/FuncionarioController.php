@@ -16,6 +16,7 @@ class FuncionarioController extends Controller
      */
     protected $request;
     protected $filial;
+    private $totalPage = 5;
 
     public function __construct(Filial $filial,Funcionario $funcionario)
     {
@@ -24,9 +25,8 @@ class FuncionarioController extends Controller
     }
     public function index()
     {
-        $funcionarios = $this->funcionario::all();
+        $funcionarios = $this->funcionario::paginate($this->totalPage);
         $title = 'Listagem do Funcionario';
-        
         return view('funcionario.index', compact('funcionarios','title'));
     }
 
@@ -51,6 +51,7 @@ class FuncionarioController extends Controller
     public function store(FuncionarioFormRequest $request)
     {
         $dataForm = $request->all();
+        $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
         $insert = $this->funcionario->create($dataForm);
         if($insert)
             return redirect()->route('funcionario.index');
@@ -74,7 +75,7 @@ class FuncionarioController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     *active
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +84,6 @@ class FuncionarioController extends Controller
         $funcionario = $this->funcionario->find($id);
         $filiais = $this->filial::all();
         $title = "Editar {$funcionario->nome}";
-
         return view('funcionario.create-edit',compact('title','funcionario','filiais'));
     }
 
@@ -96,16 +96,15 @@ class FuncionarioController extends Controller
      */
     public function update(FuncionarioFormRequest $request, $id)
     {
+        dd($request);
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
         $update = $funcionario->update($dataForm);
-
         if( $update )
             return redirect()->route('funcionario.index');
         else
             return redirect()->route('funcionario.edit',$id)->with(['errors' => 'Falha ao editar']);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -120,5 +119,24 @@ class FuncionarioController extends Controller
             return redirect()->route('funcionario.index');
         else
             return redirect()->route('funcionario.index')->with(['errors' => 'Falha ao deletar']);
+    }
+
+    public function active($id){
+        $funcionario = $this->funcionario->find($id);
+        $update = $funcionario->update(['situacao' => 1]);
+        if( $update )
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.index',$id)->with(['errors' => 'Não foi possível ativar']);
+    }
+
+    public function disable($id){
+        $funcionario = $this->funcionario->find($id);
+        $update = $funcionario->update(['situacao' => 0]);
+        if( $update )
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.index',$id)->with(['errors' => 'Não foi possível desativar']);
+        
     }
 }

@@ -38,13 +38,14 @@
                   <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" alt="view"></a>
                   <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" alt="update"></a>
                   <a href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" alt="delete"></a>
-                  <a href=""><img src="../img/enable.svg" alt="enable"></a>
-                  <a href=""><img src="../img/disable.svg" alt="disable"></a>
               </td>
               </tr>
           @endforeach
         </tbody>
     </table>
+    <div class="paginacao">
+      {!! $automoveis->links() !!}
+    </div>
 </div>
 @endsection
 @push('styles')

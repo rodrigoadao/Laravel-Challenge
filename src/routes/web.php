@@ -14,10 +14,9 @@
 // testes
 
 use Illuminate\Support\Facades\Route;
+// ->middleware('auth');
 
 Route::resource('automovel','AutomovelController');
-
-// ->middleware('auth');
 Route::resource('filial','FilialController');
 Route::resource('funcionario','FuncionarioController');
 
@@ -25,6 +24,9 @@ Route::get('filial/delete/{id}','FilialController@destroy')->name('filial.delete
 Route::get('automovel/delete/{id}','AutomovelController@destroy')->name('automovel.delete');
 Route::get('funcionario/delete/{id}','FuncionarioController@destroy')->name('funcionario.delete');
 
+
+Route::get('funcionario/active/{id}','FuncionarioController@active')->name('funcionario.active');
+Route::get('funcionario/disable/{id}','FuncionarioController@disable')->name('funcionario.disable');
 /*Route::delete('automovel/{id}','AutomovelController@destroy')->name('automovel.destroy');
 Route::put('automovel/{id}','AutomovelController@update')->name('automovel.update');
 Route::get('automovel/{id}/edit','AutomovelController@edit')->name('automovel.edit');
