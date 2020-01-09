@@ -2,6 +2,7 @@
 
 use App\Models\Funcionario;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class FuncionarioTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class FuncionarioTableSeeder extends Seeder
             'endereco' => 'Colatina ES, Rua Pedro Epichin',
             'dtNacimento' => '1997-10-28',
             'sexo' => 0,
-            'cpf' => '99999999999',
+            'password' => Hash::make('123456'),
             'cargo' => 'admin',
             'salario' => 999999,
             'situacao' => 0,

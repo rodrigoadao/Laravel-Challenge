@@ -13,10 +13,18 @@
                     <div class="form-title">
                         <h1>Entrar</h1>
                     </div>
-                    <form action="">
+                    <form action="{{ route('funcionario.postLogin') }}" method="post">
+                        @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Digite o CPF" maxlength="5">
+                            <input name="password" type="text" class="form-control" placeholder="Digite o CPF"  value="{{ old('cpf') }}">
                         </div>
+                        @if ( isset($errors) && count($errors) > 0)
+                        <div class="alert alert-info">
+                            @foreach ( $errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                        @endif
                         <button type="submit" class="btn btn-sucess">Login</button>
                     </form>
                 </div>

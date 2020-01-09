@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'funcionario',
+        'passwords' => 'users',
     ],
 
     /*
@@ -38,14 +38,13 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
+            'provider' => 'users',
+        ],
+        'funcionario' => [
+            'driver' => 'session',
             'provider' => 'funcionario',
         ],
 
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'funcionario',
-            'hash' => false,
-        ],
     ],
 
     /*
@@ -71,10 +70,10 @@ return [
             'model' => App\Models\Funcionario::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'database',
+            'table' => 'users',
+        ],
     ],
 
     /*

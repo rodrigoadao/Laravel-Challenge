@@ -9,8 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class Funcionario extends Authenticatable
 {
 
-    protected $table = 'funcionario';
     use Notifiable;
+    protected $table = 'funcionario';
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +23,7 @@ class Funcionario extends Authenticatable
         'endereco',
         'dtNacimento',
         'sexo',
-        'cpf',
+        'password',
         'cargo',
         'salario',
         'situacao'
@@ -46,5 +46,11 @@ class Funcionario extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
 
 }

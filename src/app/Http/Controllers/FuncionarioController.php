@@ -6,6 +6,7 @@ use App\Http\Requests\FuncionarioFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Filial;
+use Illuminate\Support\Facades\Auth;
 
 class FuncionarioController extends Controller
 {
@@ -23,6 +24,30 @@ class FuncionarioController extends Controller
         $this->filial = $filial;
         $this->funcionario = $funcionario;
     }
+
+    public function login(){
+        return view('login');
+    }
+
+    public function postLogin(Request $request){
+        $validator = validator($request->all(), ['password' => 'required|min:5|numeric']);
+        if($validator->fails()){
+            return redirect()->route('funcionario.login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
+        }
+
+        $cpf = $request->only('password');
+        //$cpf = bcrypt('123456');
+        $credentials = $cpf;
+        
+        if( Auth::guard('funcionario')->attempt($credentials) ){
+            echo "teste";
+            return redirect()->route('funcionario.index');
+        } else{
+            dd(Auth::guard('funcionario')->attempt($credentials));
+            return redirect()->route('funcionario.login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
+        }
+    }
+
     public function index()
     {
         $funcionarios = $this->funcionario::paginate($this->totalPage);
@@ -96,7 +121,6 @@ class FuncionarioController extends Controller
      */
     public function update(FuncionarioFormRequest $request, $id)
     {
-        dd($request);
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
         $update = $funcionario->update($dataForm);
