@@ -28,7 +28,10 @@ class AutomovelController extends Controller
     }
 
     public function show($id){
-        return ' Exibindo o produto de id: ' + $id;
+        $automovel = $this->automovel->find($id);
+        $title = "Filial: {$automovel->nome}";
+
+        return view('automovel.show', compact('automovel','title'));
     }
 
     public function create(){
@@ -71,6 +74,13 @@ class AutomovelController extends Controller
     }
 
     public function destroy($id){
-        return 'Editando Produto ' + $id;
+        $automovel = $this->automovel->find($id);
+
+        $delete = $automovel->delete();
+        
+        if($delete)
+            return redirect()->route('automovel.index');
+        else
+            return redirect()->route('automovel.index')->with(['errors' => 'Falha ao deletar']);
     }
 }
