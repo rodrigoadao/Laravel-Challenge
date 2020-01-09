@@ -35,8 +35,9 @@
                 <td>{{ $automovel->chassi }}</td>
                 <td>{{ $automovel->categoria }}</td>
                 <td class="img-commands">
+                  <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" alt="view"></a>
                   <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" alt="update"></a>
-                  <a href=""><img src="../img/delete.svg" alt="delete"></a>
+                  <a href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" alt="delete"></a>
                   <a href=""><img src="../img/enable.svg" alt="enable"></a>
                   <a href=""><img src="../img/disable.svg" alt="disable"></a>
               </td>

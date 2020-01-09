@@ -39,8 +39,9 @@
                   <td>{{ $funcionario->salario }}</td>
                   <td>{{ $funcionario->situacao }}</td>
                   <td class="img-commands">
+                      <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img src="../img/view.svg" alt=""></a>
                       <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" alt=""></a>
-                      <a href=""><img src="../img/delete.svg" alt=""></a>
+                      <a href="{{ route('funcionario.delete', $funcionario->id) }}"><img src="../img/delete.svg" alt=""></a>
                       <a href=""><img src="../img/enable.svg" alt=""></a>
                       <a href=""><img src="../img/disable.svg" alt=""></a>
                   </td>

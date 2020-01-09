@@ -66,7 +66,10 @@ class FuncionarioController extends Controller
      */
     public function show($id)
     {
-        //
+        //$filial = $this->filial->where('id',$id)->get();
+        $funcionario = $this->funcionario->find($id);
+        $title = "Funcionario: {$funcionario->nome}";
+        return view('funcionario.show', compact('funcionario','title'));
     }
 
     /**
@@ -111,6 +114,11 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = $this->funcionario->find($id);
+        $delete = $funcionario->delete();
+        if($delete)
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.index')->with(['errors' => 'Falha ao deletar']);
     }
 }
