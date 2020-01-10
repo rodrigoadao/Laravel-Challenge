@@ -23,6 +23,7 @@ class Funcionario extends Authenticatable
         'endereco',
         'dtNacimento',
         'sexo',
+        'cpf',
         'password',
         'cargo',
         'salario',

@@ -5,9 +5,14 @@
 @section('content')
   <div class="modal-content">
       <div class="row justify-content-end my-3">
-              <div class="col-2 ">
+            <div class="col-6">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2 col-8" type="search" placeholder="Search" aria-label="Search">
+                <a href=""><img src="../img/pesquisar.svg" alt=""></a>
+            </div>
+            <div class="col-2 ">
               <a href="{{ route('funcionario.create')}}" class="btn btn-sucess form-control">Novo</a>
-              </div>
+            </div>
       </div>
       <hr>
       <table class="table">
@@ -46,10 +51,7 @@
                     <a href="{{ route('funcionario.active', $funcionario->id) }}"><img src="../img/enable.svg" alt=""></a>
                   @else
                     <a href="{{ route('funcionario.disable', $funcionario->id) }}"><img src="../img/disable.svg" alt=""></a>
-                  @endif
-                   
-                    
-                    
+                  @endif    
                 </td>
               </tr>
             @endforeach

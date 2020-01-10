@@ -55,20 +55,23 @@ nav ul span {
   display: block;
   padding: 15px;
   color: white;
-  border-bottom: 1px solid #b0e0e6;
+  border-bottom: 1px solid white;
 }
 
 nav ul a {
   position: relative;
   display: block;
-  padding: 15px 15px 17px 50px;
+  padding: 15px 10px 17px 10px;
   color: white;
 }
 
+a > img {
+  padding-left: 10px;
+  width: 45px;
+}
 nav ul a:hover,
 nav ul a.active {
-  background-color: #b0e0e6;
-  color: black;
+  color: #b0e0e6;
   text-decoration: none;
   border: 1px solid #2c2c2c;
 }

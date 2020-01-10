@@ -68,6 +68,7 @@ return [
         'funcionario' => [
             'driver' => 'eloquent',
             'model' => App\Models\Funcionario::class,
+            'table' => 'funcionario'
         ],
 
         'users' => [

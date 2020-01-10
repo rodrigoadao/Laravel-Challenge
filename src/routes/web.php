@@ -10,28 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// testes
-
 use Illuminate\Support\Facades\Route;
-// ->middleware('auth');
 
 Route::group(['middleware' => 'funcionario'], function(){
-    Route::get('/','FuncionarioController@login')->name('funcionario.login');
+    Route::get('/','FuncionarioController@login')->name('login');
     Route::post('/','FuncionarioController@postLogin')->name('funcionario.postLogin');
+    Route::get('/admin/logout','FuncionarioController@logout')->name('funcionario.logout');
     
+    Route::group(['middleware' => 'auth:funcionario'], function(){
+        Route::resource('automovel','AutomovelController');
+        Route::resource('filial','FilialController');
+        Route::resource('funcionario','FuncionarioController');
 
+        Route::get('filial/delete/{id}','FilialController@destroy')->name('filial.delete');
+        Route::get('automovel/delete/{id}','AutomovelController@destroy')->name('automovel.delete');
+        Route::get('funcionario/delete/{id}','FuncionarioController@destroy')->name('funcionario.delete');
+
+        Route::get('funcionario/active/{id}','FuncionarioController@active')->name('funcionario.active');
+        Route::get('funcionario/disable/{id}','FuncionarioController@disable')->name('funcionario.disable');
+    });
 });
-Route::resource('automovel','AutomovelController');
-Route::resource('filial','FilialController');
-Route::resource('funcionario','FuncionarioController');
 
-Route::get('filial/delete/{id}','FilialController@destroy')->name('filial.delete');
-Route::get('automovel/delete/{id}','AutomovelController@destroy')->name('automovel.delete');
-Route::get('funcionario/delete/{id}','FuncionarioController@destroy')->name('funcionario.delete');
 
-Route::get('funcionario/active/{id}','FuncionarioController@active')->name('funcionario.active');
-Route::get('funcionario/disable/{id}','FuncionarioController@disable')->name('funcionario.disable');
+
 // Principais
 /*Route::delete('automovel/{id}','AutomovelController@destroy')->name('automovel.destroy');
 Route::put('automovel/{id}','AutomovelController@update')->name('automovel.update');

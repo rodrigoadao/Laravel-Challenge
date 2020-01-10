@@ -15,8 +15,11 @@
                     </div>
                     <form action="{{ route('funcionario.postLogin') }}" method="post">
                         @csrf
-                        <div class="form-group">
-                            <input name="password" type="text" class="form-control" placeholder="Digite o CPF"  value="{{ old('cpf') }}">
+                        <div class="form-group cpf">
+                            <input name="cpf" data-js="cpf" type="text" class="form-control" placeholder="Digite o CPF" maxlength="14" value="{{ old('cpf') }}">
+                        </div>
+                        <div class="form-group password">
+                            <input name="password" type="password" class="form-control" placeholder="Digite a senha"  value="{{ old('password') }}">
                         </div>
                         @if ( isset($errors) && count($errors) > 0)
                         <div class="alert alert-info">
@@ -31,7 +34,10 @@
             </div>
         </div>
     </div>
-@endsection
-@push('styles')
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    @push('styles')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
 @endpush
+@push('scripts')
+<script src="{{ asset('js/utils.js') }}"></script>
+@endpush
+@endsection

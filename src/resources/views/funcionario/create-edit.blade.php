@@ -26,8 +26,8 @@
                     <input type="text"  class="form-control" name="nome" id="nome" value="{{ $funcionario->nome ?? old('nome') }}">
                 </div>
                 <div class="col-4">  
-                    <label for="password">Cpf: </label>
-                    <input type="text"  class="form-control" name="password" id="password" value="{{ $funcionario->cpf ?? old('cpf') }}">
+                    <label for="cpf">Cpf: </label>
+                    <input type="text"  class="form-control" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
                 </div>
                 <div class="col-4">
                     <label for="dtNacimento">Dt Nascimento: </label>

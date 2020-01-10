@@ -32,17 +32,27 @@ body{
     padding-bottom: 10px;
 }
 .form-group input{
-    background-image: url('../img/cpficon.jpg');
-    background-repeat: no-repeat;
-    background-size: 45px;
-    position: left;
-    height: 45px;
     border-radius: 5px;
     border: 0;
     font-size: 18px;
     letter-spacing: 2px;
     padding-left: 50px;
+    position: left;
+    background-repeat: no-repeat;
+    height: 45px;
 }
+
+.cpf input {
+    background-image: url('../img/cpficon.jpg');
+    background-size: 45px;
+}
+
+.password input{
+    background-image: url('../img/password.svg');
+    background-size: 40px;
+
+}
+
 .form-input button{
     width: 50%;
     margin: 25px 0px 35px;

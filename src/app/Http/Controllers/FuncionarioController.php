@@ -8,6 +8,9 @@ use App\Models\Funcionario;
 use App\Models\Filial;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+
 class FuncionarioController extends Controller
 {
     /**
@@ -25,26 +28,29 @@ class FuncionarioController extends Controller
         $this->funcionario = $funcionario;
     }
 
-    public function login(){
+    public function login()
+    {
         return view('login');
     }
 
+    public function logout()
+    {
+        Auth::guard('funcionario')->logout();
+        return redirect()->route('login');
+    }
     public function postLogin(Request $request){
         $validator = validator($request->all(), ['password' => 'required|min:5|numeric']);
         if($validator->fails()){
-            return redirect()->route('funcionario.login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
+            return redirect()->route('login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
         }
-
-        $cpf = $request->only('password');
-        //$cpf = bcrypt('123456');
-        $credentials = $cpf;
+        $cpf = $request->input('cpf');
+        $password = $request->input('password');
         
+        $credentials = ['cpf' => $cpf, 'password' => $password];
         if( Auth::guard('funcionario')->attempt($credentials) ){
-            echo "teste";
             return redirect()->route('funcionario.index');
         } else{
-            dd(Auth::guard('funcionario')->attempt($credentials));
-            return redirect()->route('funcionario.login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
+            return redirect()->route('login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
         }
     }
 
@@ -77,6 +83,8 @@ class FuncionarioController extends Controller
     {
         $dataForm = $request->all();
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
+        $dataForm['password'] = Hash::make(1234);
+
         $insert = $this->funcionario->create($dataForm);
         if($insert)
             return redirect()->route('funcionario.index');
