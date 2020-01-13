@@ -10,12 +10,12 @@
             <p><b>ID: </b> {{$funcionario->id}} </p>
             <p><b>Nome: </b>  {{$funcionario->nome}} </p>
             <p><b>Endereço: </b>  {{$funcionario->endereco}} </p>
-            <p><b>Data Nascimento: </b> {{$funcionario->dtNacimento}} </p>
-            <p><b>Sexo: </b>  {{$funcionario->sexo}} </p>
+            <p><b>Data Nascimento: </b> {{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y')}} </p>
+            <p><b>Sexo: </b>  {{$funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }} </p>
             <p><b>CPF: </b>  {{$funcionario->cpf}} </p>
             <p><b>Cargo: </b>  {{$funcionario->cargo}} </p>
             <p><b>Salario: </b>  {{$funcionario->salario}} </p>
-            <p><b>Situação: </b>  {{$funcionario->situacao}} </p>
+            <p><b>Situação: </b>  {{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }} </p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">
                     <a href="{{ route('funcionario.index') }}" class="btn btn-sucess form-control">Cancelar</a>

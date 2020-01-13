@@ -33,13 +33,13 @@
                 </div>
                 <div class="col-md-4">
                     <label for="ie">Insc. Estadual: </label>
-                    <input type="text"  class="form-control" name="ie" id="estado" value="{{ $filial->ie ?? old('ie') }}">
+                    <input type="text"  class="form-control" data-js="ie" name="ie" maxlength="10" id="estado" value="{{ $filial->ie ?? old('ie') }}">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-md-4">
                     <label for="cnpj">CNPJ: </label>
-                    <input type="text" class="form-control" name="cnpj" id="cnpj"  value="{{ $filial->cnpj ?? old('cnpj') }}">
+                    <input type="text" class="form-control" name="cnpj" id="cnpj"  data-js="cnpj" maxlength="18"  value="{{ $filial->cnpj ?? old('cnpj') }}">
                 </div>
             </div>
         </div>
@@ -56,4 +56,7 @@
 @endsection
 @push('styles')
     <link href="/css/create.css" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endpush

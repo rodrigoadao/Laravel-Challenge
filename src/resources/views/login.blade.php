@@ -13,17 +13,31 @@
                     <div class="form-title">
                         <h1>Entrar</h1>
                     </div>
-                    <form action="">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Digite o CPF" maxlength="5">
+                    <form action="{{ route('funcionario.postLogin') }}" method="post">
+                        @csrf
+                        <div class="form-group cpf">
+                            <input name="cpf" data-js="cpf" type="text" class="form-control" placeholder="Digite o CPF" maxlength="14" value="{{ old('cpf') }}">
                         </div>
+                        <div class="form-group password">
+                            <input name="password" type="password" class="form-control" placeholder="Digite a senha"  value="{{ old('password') }}">
+                        </div>
+                        @if ( isset($errors) && count($errors) > 0)
+                        <div class="alert alert-info">
+                            @foreach ( $errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                        @endif
                         <button type="submit" class="btn btn-sucess">Login</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-@push('styles')
-    <link href="css/login.css" rel="stylesheet" type="text/css">
+    @push('styles')
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css">
 @endpush
+@push('scripts')
+<script src="{{ asset('js/utils.js') }}"></script>
+@endpush
+@endsection

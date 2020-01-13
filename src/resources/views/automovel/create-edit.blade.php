@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-4">
                     <label for="ano">Ano: </label>
-                    <input type="text"  class="form-control" name="ano" id="ano" value="{{ $automovel->ano ?? old('ano') }}">
+                    <input type="text"  class="form-control" name="ano" id="ano" maxlength="4" value="{{ $automovel->ano ?? old('ano') }}">
                 </div>
                 <div class="col-4">
                     <label for="modelo">Modelo: </label>

@@ -24,11 +24,11 @@ class AutomovelFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome'      => 'required|min:3|max:100',
-            'ano'       => 'required|min:3|max:100',
-            'modelo'    => 'required|min:3|max:100|numeric',
-            'cor'       => 'required|min:3|max:100|',
-            'chassi'    => 'required|max:100|numeric',
+            'nome'      => 'required|min:3',
+            'ano'       => 'required|min:3',
+            'modelo'    => 'required|min:3',
+            'cor'       => 'required|min:3',
+            'chassi'    => 'required|numeric',
             'categoria' => 'required',
         ];
     }

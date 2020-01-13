@@ -11,6 +11,7 @@ class AutomovelController extends Controller
 {
     protected $filial;
     protected $automovel;
+    private $totalPage = 5;
 
     public function __construct(Automovel $automovel,Filial $filial)
     {
@@ -20,9 +21,8 @@ class AutomovelController extends Controller
         // $this->middleware('auth')->except('index');
     }
 
-
     public function index(){
-        $automoveis = $this->automovel::all();
+        $automoveis = $this->automovel::paginate($this->totalPage);
         $title = "Listagem de Automovéis";
         return view('automovel.index', compact('automoveis','title'));
     }
@@ -30,7 +30,6 @@ class AutomovelController extends Controller
     public function show($id){
         $automovel = $this->automovel->find($id);
         $title = "Filial: {$automovel->nome}";
-
         return view('automovel.show', compact('automovel','title'));
     }
 
@@ -75,9 +74,7 @@ class AutomovelController extends Controller
 
     public function destroy($id){
         $automovel = $this->automovel->find($id);
-
         $delete = $automovel->delete();
-        
         if($delete)
             return redirect()->route('automovel.index');
         else

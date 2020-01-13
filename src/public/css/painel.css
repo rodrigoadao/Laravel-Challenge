@@ -14,7 +14,7 @@ html, body {
 
 body {
   font: 15px/1 'Open Sans', sans-serif;
-  color: #777;
+  color: black;
 }
 
 a {
@@ -61,13 +61,18 @@ nav ul span {
 nav ul a {
   position: relative;
   display: block;
-  padding: 15px 15px 17px 50px;
+  padding: 15px 10px 17px 10px;
   color: white;
 }
 
+a > img {
+  padding-left: 10px;
+  width: 45px;
+}
 nav ul a:hover,
 nav ul a.active {
-  background-color: white;
+  color: #b0e0e6;
+  text-decoration: none;
   border: 1px solid #2c2c2c;
 }
 

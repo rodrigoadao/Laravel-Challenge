@@ -10,21 +10,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// testes
-
 use Illuminate\Support\Facades\Route;
 
-Route::resource('automovel','AutomovelController');
+Route::group(['middleware' => 'funcionario'], function(){
+    Route::get('/','FuncionarioController@login')->name('login');
+    Route::post('/','FuncionarioController@postLogin')->name('funcionario.postLogin');
+    Route::get('/admin/logout','FuncionarioController@logout')->name('funcionario.logout');
+    
+    Route::group(['middleware' => 'auth:funcionario'], function(){
+        Route::resource('automovel','AutomovelController');
+        Route::resource('filial','FilialController');
+        Route::resource('funcionario','FuncionarioController');
 
-// ->middleware('auth');
-Route::resource('filial','FilialController');
-Route::resource('funcionario','FuncionarioController');
+        Route::get('filial/delete/{id}','FilialController@destroy')->name('filial.delete');
+        Route::get('automovel/delete/{id}','AutomovelController@destroy')->name('automovel.delete');
+        Route::get('funcionario/delete/{id}','FuncionarioController@destroy')->name('funcionario.delete');
 
-Route::get('filial/delete/{id}','FilialController@destroy')->name('filial.delete');
-Route::get('automovel/delete/{id}','AutomovelController@destroy')->name('automovel.delete');
-Route::get('funcionario/delete/{id}','FuncionarioController@destroy')->name('funcionario.delete');
+        Route::get('funcionario/active/{id}','FuncionarioController@active')->name('funcionario.active');
+        Route::get('funcionario/disable/{id}','FuncionarioController@disable')->name('funcionario.disable');
+    });
+});
 
+
+
+// Principais
 /*Route::delete('automovel/{id}','AutomovelController@destroy')->name('automovel.destroy');
 Route::put('automovel/{id}','AutomovelController@update')->name('automovel.update');
 Route::get('automovel/{id}/edit','AutomovelController@edit')->name('automovel.edit');
@@ -81,11 +90,6 @@ Route::get('/nome-url',function(){
     return 'Hey hey hey';
 })->name('url.name');*/
 
-
-// Principais
-Route::get('/',function(){
-    return view('login');
-})->name('login');
 
 /*Route::get('/', function () {
     return view('welcome');

@@ -6,6 +6,10 @@ use App\Http\Requests\FuncionarioFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Filial;
+use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller
 {
@@ -16,18 +20,45 @@ class FuncionarioController extends Controller
      */
     protected $request;
     protected $filial;
+    private $totalPage = 5;
 
     public function __construct(Filial $filial,Funcionario $funcionario)
     {
         $this->filial = $filial;
         $this->funcionario = $funcionario;
     }
+
+    public function login()
+    {
+        return view('login');
+    }
+
+    public function logout()
+    {
+        Auth::guard('funcionario')->logout();
+        return redirect()->route('login');
+    }
+    public function postLogin(Request $request){
+        $validator = validator($request->all(), ['password' => 'required|min:5|numeric']);
+        if($validator->fails()){
+            return redirect()->route('login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
+        }
+        $cpf = $request->input('cpf');
+        $password = $request->input('password');
+        
+        $credentials = ['cpf' => $cpf, 'password' => $password];
+        if( Auth::guard('funcionario')->attempt($credentials) ){
+            return redirect()->route('funcionario.index');
+        } else{
+            return redirect()->route('login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
+        }
+    }
+
     public function index()
     {
-        $funcionarios = $this->funcionario::all();
+        $funcionarios = Funcionario::paginate($this->totalPage);
         $title = 'Listagem do Funcionario';
-        
-        return view('funcionario.index', compact('funcionarios','title'));
+        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 
     /**
@@ -51,6 +82,14 @@ class FuncionarioController extends Controller
     public function store(FuncionarioFormRequest $request)
     {
         $dataForm = $request->all();
+
+        $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
+        $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
+
+
+        $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
+        $dataForm['password'] = Hash::make(1234);
+
         $insert = $this->funcionario->create($dataForm);
         if($insert)
             return redirect()->route('funcionario.index');
@@ -74,7 +113,7 @@ class FuncionarioController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     *active
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +122,6 @@ class FuncionarioController extends Controller
         $funcionario = $this->funcionario->find($id);
         $filiais = $this->filial::all();
         $title = "Editar {$funcionario->nome}";
-
         return view('funcionario.create-edit',compact('title','funcionario','filiais'));
     }
 
@@ -99,13 +137,11 @@ class FuncionarioController extends Controller
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
         $update = $funcionario->update($dataForm);
-
         if( $update )
             return redirect()->route('funcionario.index');
         else
             return redirect()->route('funcionario.edit',$id)->with(['errors' => 'Falha ao editar']);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -120,5 +156,24 @@ class FuncionarioController extends Controller
             return redirect()->route('funcionario.index');
         else
             return redirect()->route('funcionario.index')->with(['errors' => 'Falha ao deletar']);
+    }
+
+    public function active($id){
+        $funcionario = $this->funcionario->find($id);
+        $update = $funcionario->update(['situacao' => 1]);
+        if( $update )
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.index',$id)->with(['errors' => 'Não foi possível ativar']);
+    }
+
+    public function disable($id){
+        $funcionario = $this->funcionario->find($id);
+        $update = $funcionario->update(['situacao' => 0]);
+        if( $update )
+            return redirect()->route('funcionario.index');
+        else
+            return redirect()->route('funcionario.index',$id)->with(['errors' => 'Não foi possível desativar']);
+        
     }
 }
