@@ -26,9 +26,9 @@ class FuncionarioFormRequest extends FormRequest
         return [
             'nome'      => 'required|min:3|max:100',
             'endereco'  => 'required|min:3|max:100',
-            'dtNacimento'        => 'required|max:20',
+            'dtNacimento'        => 'required|min:10',
             'sexo'      => 'required|numeric',
-            'cpf'      => 'required|numeric',
+            'cpf'      => 'required|min:14',
             'cargo'      => 'required|max:20',
             'salario'      => 'required|numeric',
         ];

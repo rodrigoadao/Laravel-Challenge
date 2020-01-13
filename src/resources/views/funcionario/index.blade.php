@@ -36,13 +36,13 @@
               <tr row @if ($funcionario->situacao == 0 ) disable @endif>
                 <th scope="row">{{ $funcionario->id }}</th>
                 <td>{{ $funcionario->nome }}</td>
-                <td>{{ $funcionario->dtNacimento}}</td>
-                <td>{{ $funcionario->sexo }}</td>
-                <td>{{ $funcionario->cpf }}</td>
+                <td>{{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y') }}</td>
+                <td>{{ $funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }}</td>
+                <td>{{ $funcionario->cpf  }}</td>
                 <td>{{ $funcionario->endereco }}</td>
                 <td>{{ $funcionario->cargo }}</td>
                 <td>{{ $funcionario->salario }}</td>
-                <td>{{ $funcionario->situacao }}</td>
+                <td>{{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }}</td>
                 <td class="img-commandsFunc">
                   <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img src="../img/view.svg" alt=""></a>
                   <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" alt=""></a>

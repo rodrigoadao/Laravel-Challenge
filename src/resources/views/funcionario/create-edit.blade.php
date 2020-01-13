@@ -27,18 +27,14 @@
                 </div>
                 <div class="col-4">  
                     <label for="cpf">Cpf: </label>
-                    <input type="text"  class="form-control" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
+                    <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
                 </div>
                 <div class="col-4">
                     <label for="dtNacimento">Dt Nascimento: </label>
-                    <input type="text"  class="form-control" name="dtNacimento" id="dtNacimento" value="{{ $funcionario->dtNacimento ?? old('dtNacimento') }}">
+                    <input type="text"  class="form-control" data-js="dtNasc" name="dtNacimento" id="dtNacimento" maxlength="10" value="{{ $funcionario->dtNacimento ?? old('dtNacimento') }}">
                 </div>
             </div>
             <div class="row mt-4">
-                <div class="col-4">
-                    <label for="sexo">Sexo: </label>
-                    <input type="text" class="form-control" name="sexo" id="sexo" value="{{ $funcionario->sexo ?? old('sexo') }}">
-                </div>
                 <div class="col-4">
                     <label for="endereco">Endereço: </label>
                     <input type="text"  class="form-control" name="endereco" id="endereco" value="{{ $funcionario->endereco ?? old('endereco') }}">
@@ -46,12 +42,19 @@
                 <div class="col-4">
                     <label for="cargo">Cargo: </label>
                     <input type="text"  class="form-control" name="cargo" id="cargo" value="{{ $funcionario->cargo ?? old('cargo') }}">
+                </div> 
+                <div class="col-4">
+                    <label for="salario">Sálario: </label>
+                    <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-4">
-                    <label for="salario">Sálario: </label>
-                    <input type="text"  class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
+                    <label for="sexo">Sexo:</label>
+                    <select name="sexo" class="form-control" id="sexo">
+                        <option value="0">Masculino</option>
+                        <option value="1">Feminino</option>
+                    </select>
                 </div>
                 <div class="col-4">
                     <label for="filial">Filial: </label>
@@ -65,6 +68,7 @@
                         @endforeach
                     </select>
                 </div>
+                
                 <div class="col-4 form-check">
                     <input type="checkbox" id="situacao" name="situacao" value="1" @if( isset($funcionario) && $funcionario->situacao == '1') checked @endif>
                     <label class="form-check-label" for="situacao">Ativo</label>
@@ -84,4 +88,7 @@
 @endsection
 @push('styles')
     <link href="/css/create.css" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endpush

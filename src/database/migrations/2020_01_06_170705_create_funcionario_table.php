@@ -18,7 +18,7 @@ class CreateFuncionarioTable extends Migration
             $table->integer('filial_id')->unsigned();
             $table->string('nome',150);
             $table->string('endereco',150);
-            $table->date('dtNacimento');
+            $table->dateTime('dtNacimento');
             $table->boolean('sexo');
             $table->string('cpf');
             $table->string('password');

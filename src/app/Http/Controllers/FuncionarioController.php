@@ -56,9 +56,9 @@ class FuncionarioController extends Controller
 
     public function index()
     {
-        $funcionarios = $this->funcionario::paginate($this->totalPage);
+        $funcionarios = Funcionario::paginate($this->totalPage);
         $title = 'Listagem do Funcionario';
-        return view('funcionario.index', compact('funcionarios','title'));
+        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 
     /**
@@ -82,6 +82,11 @@ class FuncionarioController extends Controller
     public function store(FuncionarioFormRequest $request)
     {
         $dataForm = $request->all();
+
+        $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
+        $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
+
+
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
         $dataForm['password'] = Hash::make(1234);
 
