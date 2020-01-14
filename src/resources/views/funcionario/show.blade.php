@@ -1,6 +1,6 @@
 @extends('painel')
 
-@section('titulo','Visualizar Filial')
+@section('titulo','Visualizar Funcionario')
 
 
 @section('content')

@@ -22,7 +22,6 @@ class CreateFilialTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

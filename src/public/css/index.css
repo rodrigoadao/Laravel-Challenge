@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-
 body{
     font-family: 'Roboto',sans-serif;
 }
@@ -17,24 +16,37 @@ body{
     color: black;
     background-color: white;
     border: 1px solid #2c2c2c;
-    
 }
 
 table img{
     width: 35px;
-    margin: 0px 2px
+    margin: 0px 2px;
+}
+
+[row]{
+    transition: all 0.8s ease;
 }
 
 [row]:hover{
-    background-color: #b0e0e6;
+    background-color: #6ac9c9;
     color: black;
-}
-.img-commands{
-    width: 150px;
 }
 
 .img-commandsFunc{
     width: 195px;
+}
+
+.hcenter{
+    text-align: center;
+}
+
+table{
+    width: 100%;
+    border-left: 2px solid #2c2c2c;
+    border-right: 2px solid #2c2c2c;
+}
+.table td{
+    vertical-align: middle;
 }
 
 div .paginacao{
@@ -55,9 +67,27 @@ div .paginacao > nav {
 }
 
 [disable] {
-    background-color: tomato;
+    background-color: #ff6347ad;
 }
 
 [row][disable]:hover{
-    background-color: tomato;
+    background-color: #ff6347ad;
 }
+
+td  a  img{
+    transition: all 0.45s ease;
+}
+td > a > img:hover{
+    filter: invert(100%);
+}
+
+
+.width-15{ width: 15%;}
+.width-20{ width: 20%;}
+.width-25{ width: 25%;}
+.width-30{ width: 30%;}
+.width-40{ width: 40%;}
+.width-50{ width: 50%;}
+.width-60{ width: 60%;}
+.width-70{ width: 70%;}
+.width-80{ width: 80%;}

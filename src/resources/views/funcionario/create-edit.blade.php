@@ -3,14 +3,42 @@
 @section('titulo','Cadastrar Novo Funcionário')
 
 @section('content')
+
+
+
+
 <div class="modal-content">
-    @if ( isset($errors) && count($errors) > 0)
-    <div class="alert alert-danger">
-        @foreach ( $errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Erro ao cadastrar funcionário.</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            @if ( isset($errors) && count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach ( $errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
     </div>
-@endif
+  </div>
 
 @if ( isset($funcionario) )
     <form action="{{ route('funcionario.update', $funcionario->id)}}" method="post">
@@ -30,7 +58,7 @@
                     <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
                 </div>
                 <div class="col-4">
-                    <label for="dtNacimento">Dt Nascimento: </label>
+                    <label for="dtNacimento">Data Nascimento: </label>
                     <input type="text"  class="form-control" data-js="dtNasc" name="dtNacimento" id="dtNacimento" maxlength="10" value="{{ $funcionario->dtNacimento ?? old('dtNacimento') }}">
                 </div>
             </div>
@@ -52,6 +80,7 @@
                 <div class="col-4">
                     <label for="sexo">Sexo:</label>
                     <select name="sexo" class="form-control" id="sexo">
+                        <option></option>
                         <option value="0">Masculino</option>
                         <option value="1">Feminino</option>
                     </select>
@@ -59,6 +88,7 @@
                 <div class="col-4">
                     <label for="filial">Filial: </label>
                     <select name="filial_id"  class="form-control" id="filial">
+                        <option></option>
                         @foreach ($filiais as $filial)
                         <option value="{{ $filial->id }}"
                             @if ( isset($funcionario) && $funcionario->filial_id == $filial->id)
@@ -77,10 +107,10 @@
         </div>
         <div class="row justify-content-end mt-5">
             <div class="col-2 mr-3" >
-                <a href="{{ route('automovel.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('funcionario.index') }}" type="submit" class="btn  form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3 ">
-                <button type="submit" class="btn btn-sucess form-control">Enviar</button>
+                <button type="submit" class="btn btn-sucess form-control">Salvar</button>
             </div>
         </div>
     </form>         

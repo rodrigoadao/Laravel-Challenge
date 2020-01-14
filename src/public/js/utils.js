@@ -56,9 +56,48 @@
         }
     }
 
+    function confirm(datajs,msg){
+        var $btw = document.querySelectorAll(datajs);
+        if($btw){
+            Array.prototype.forEach.call($btw,function(element){
+                console.log(element)
+                element.addEventListener('click',function(e){
+                    e.preventDefault()
+                    if(showMessage(msg)){
+                        console.log('testeShow')
+                        window.location.href = element.href
+                     }
+                })
+            })
+        }
+    }
+    function showMessage(msg){
+        return window.confirm(msg)
+    }
+
+    function showDialog(){
+        var $modal = document.getElementsByClassName('modal-body')[0]
+
+        $modal.addEventListener('change',function(e){
+            console.log($modal.children.length)
+            console.log('teste')
+            if($modal.children.length > 0){
+                console.log('teste1')
+                var $btn = document.querySelector('[data-toggle="modal"]');
+                console.log($btn)
+                $btn.click()
+            }
+        })
+    }
+
     CPF()
     Data()
     CNPJ()
     InscricaoEstadual()
+    confirm('[data-js="delete"]','Deseja remover este registro?')
+    confirm('[data-js="active"]','Deseja ativar este registro?')
+    confirm('[data-js="disable"]','Deseja desativar este registro?')
+    showDialog()
     
 }())
+
