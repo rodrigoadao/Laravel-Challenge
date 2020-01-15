@@ -73,7 +73,7 @@
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
                     <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
-                    <input type="hidden" data-js="hiddensalario"  >
+                    <input type="hidden" name="hiddensalario" data-js="hiddensalario"  >
                 </div>
             </div>
             <div class="row mt-4">
@@ -98,7 +98,12 @@
                         @endforeach
                     </select>
                 </div>
-                
+                <div class="col-4">
+                        <label for="password">Senha: </label>
+                        <input type="text"  class="form-control" name="password" id="password" value="{{ $funcionario->password ?? '1234' }}">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-4 form-check">
                     <input type="checkbox" id="situacao" name="situacao" value="1" @if( isset($funcionario) && $funcionario->situacao == '1') checked @endif>
                     <label class="form-check-label" for="situacao">Ativo</label>

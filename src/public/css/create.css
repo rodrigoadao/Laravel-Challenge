@@ -41,6 +41,10 @@ select > option{
     font-size: 15px;
 }
 
+.form-check{
+   padding-top: 30px;
+}
+
 p{
     padding: 10px;
 }

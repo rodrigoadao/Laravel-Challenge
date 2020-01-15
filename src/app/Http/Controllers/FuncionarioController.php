@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FuncionarioFormRequest;
+use App\Http\Requests\FuncionarioEditRequest;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Filial;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FuncionarioCreateRequest;
 use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller
@@ -79,13 +81,13 @@ class FuncionarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FuncionarioFormRequest $request)
+    public function store(FuncionarioCreateRequest $request)
     {
         $dataForm = $request->all();
 
         $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
         $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
-
+        $dataForm['salario'] = $dataForm['hiddensalario'];
 
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
         $dataForm['password'] = Hash::make(1234);
@@ -132,7 +134,7 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FuncionarioFormRequest $request, $id)
+    public function update(FuncionarioEditRequest $request, $id)
     {
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
