@@ -23,7 +23,7 @@ class CreateFuncionarioTable extends Migration
             $table->string('cpf');
             $table->string('password');
             $table->string('cargo',150);
-            $table->integer('salario');
+            $table->bigInteger('salario');
             $table->boolean('situacao');
             $table->rememberToken();
             $table->timestamps();

@@ -17,7 +17,6 @@
         <nav>
           <header>
             Desafio PHP
-            <a></a>
           </header>
           <ul>
             <li><span>PAINEL ADMIN.</span></li>

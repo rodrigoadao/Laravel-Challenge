@@ -73,6 +73,7 @@
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
                     <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
+                    <input type="hidden" data-js="hiddensalario"  >
                 </div>
             </div>
             <div class="row mt-4">

@@ -89,6 +89,23 @@
         }
     }
 
+    function formatarSalario(){
+        var $salario = document.querySelector('[data-js="salario"]')
+        var $hidden = document.querySelector('[data-js="hiddensalario"]')
+        if($salario){
+            $salario.addEventListener('input',function(e){
+                var regex = new RegExp(/\D+/g)
+                $hidden.value += e.data.replace(regex,'')
+                console.log($hidden.value)
+                $salario.value = arraySalario($hidden.value)
+            })
+        }
+    }
+
+    function arraySalario(valores){
+        return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
+    }
+
     CPF()
     Data()
     CNPJ()
@@ -98,7 +115,9 @@
     confirm('[data-js="disable"]','Deseja desativar este registro?')
     apenasNumeros('[data-js="cpf"]')
     apenasNumeros('[data-js="dtNasc"]')
+    apenasNumeros('[data-js="hiddensalario"')
     apenasNumeros('[data-js="salario"]')
+    formatarSalario()
     
 }())
 
