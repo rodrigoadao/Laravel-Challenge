@@ -5,41 +5,40 @@
 @section('content')
 
 
-
-
+@if ( isset($errors) && count($errors) > 0)
+    <script>
+        $(document).ready(function() {
+            $('#exampleModalLong').modal('show');
+        })
+    </script>
+@endif
 <div class="modal-content">
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+        <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Erro ao cadastrar funcionário.</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title" id="exampleModalLongTitle">Erro ao cadastrar funcionário.</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
+            </button>
         </div>
         <div class="modal-body">
-            @if ( isset($errors) && count($errors) > 0)
                 <div class="alert alert-danger">
+                    <p>
                     @foreach ( $errors->all() as $error)
-                        <p>{{ $error }}</p>
+                        {{ $error }} <br><br>
                     @endforeach
+                    </p>
                 </div>
-            @endif
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-sucess" data-dismiss="modal">Fechar</button>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
-
+</div>
+<!-- Modal Fim -->
 @if ( isset($funcionario) )
     <form action="{{ route('funcionario.update', $funcionario->id)}}" method="post">
         {!! method_field('PUT') !!}
@@ -107,7 +106,7 @@
         </div>
         <div class="row justify-content-end mt-5">
             <div class="col-2 mr-3" >
-                <a href="{{ route('funcionario.index') }}" type="submit" class="btn  form-control">Cancelar</a>
+                <a href="{{ route('funcionario.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3 ">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>

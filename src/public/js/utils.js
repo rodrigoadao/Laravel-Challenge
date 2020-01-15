@@ -75,19 +75,18 @@
         return window.confirm(msg)
     }
 
-    function showDialog(){
-        var $modal = document.getElementsByClassName('modal-body')[0]
-
-        $modal.addEventListener('change',function(e){
-            console.log($modal.children.length)
-            console.log('teste')
-            if($modal.children.length > 0){
-                console.log('teste1')
-                var $btn = document.querySelector('[data-toggle="modal"]');
-                console.log($btn)
-                $btn.click()
-            }
-        })
+    function apenasNumeros(datajs,){
+        var $input = document.querySelector(datajs)
+        var regex = new RegExp(/^[0-9.]+/)
+        if($input){
+            $input.addEventListener('input',function(e){
+                if(!regex.test(e.data)){
+                    var index = $input.value.length -1
+                    $input.value = $input.value.replace($input.value.charAt(index),'')
+                }
+                    
+            })
+        }
     }
 
     CPF()
@@ -97,7 +96,9 @@
     confirm('[data-js="delete"]','Deseja remover este registro?')
     confirm('[data-js="active"]','Deseja ativar este registro?')
     confirm('[data-js="disable"]','Deseja desativar este registro?')
-    showDialog()
+    apenasNumeros('[data-js="cpf"]')
+    apenasNumeros('[data-js="dtNasc"]')
+    apenasNumeros('[data-js="salario"]')
     
 }())
 
