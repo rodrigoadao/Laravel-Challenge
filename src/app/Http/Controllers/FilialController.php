@@ -38,7 +38,7 @@ class FilialController extends Controller
     public function create()
     {
         $title = "Cadastrar Filial";
-        return view('filial.create-edit',compact('title'));
+        return view('filial.create',compact('title'));
     }
 
     /**
@@ -55,7 +55,7 @@ class FilialController extends Controller
         if($insert)
             return redirect()->route('filial.index');
         else
-            return redirect()->route('filial.create-edit');
+            return redirect()->route('filial.create');
     }
 
     /**
@@ -83,7 +83,7 @@ class FilialController extends Controller
     {
         $filial = $this->filial->find($id);
         $title = "Editar {$filial->nome}";
-        return view('filial.create-edit',compact('title','filial'));
+        return view('filial.edit',compact('title','filial'));
     }
 
     /**

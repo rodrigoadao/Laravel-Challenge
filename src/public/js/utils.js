@@ -117,6 +117,8 @@
     apenasNumeros('[data-js="dtNasc"]')
     apenasNumeros('[data-js="hiddensalario"')
     apenasNumeros('[data-js="salario"]')
+    apenasNumeros('[data-js="cnpj"]')
+    apenasNumeros('[data-js="ie"]')
     formatarSalario()
     
 }())
