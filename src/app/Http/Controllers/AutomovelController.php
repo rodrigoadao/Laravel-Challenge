@@ -38,7 +38,7 @@ class AutomovelController extends Controller
         $categorias = ['Entrada','Hatch pequeno','Hatch médio','Sedã médio', 'Sedã grande','SUV','Pick-ups'];
         $title = "Cadastro Automóvel";
         $filiais = $this->filial->all();
-        return view('automovel.create-edit', compact('filiais','categorias','title'));
+        return view('automovel.create', compact('filiais','categorias','title'));
     }
 
     public function edit($id){
@@ -47,7 +47,7 @@ class AutomovelController extends Controller
 
         $categorias = ['Entrada','Hatch pequeno','Hatch médio','Sedã médio', 'Sedã grande','SUV','Pick-ups'];
         $filiais = $this->filial->all();
-        return view('automovel.create-edit',compact('title','automovel','categorias','filiais'));
+        return view('automovel.edit',compact('title','automovel','categorias','filiais'));
     }
 
     public function store(AutomovelFormRequest $request){

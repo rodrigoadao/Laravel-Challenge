@@ -75,7 +75,7 @@ class FuncionarioController extends Controller
     {
         $filiais = $this->filial::all();
         $title = 'Cadastrar Funcionario';
-        return view('funcionario.create-edit',compact('filiais','title'));
+        return view('funcionario.create',compact('filiais','title'));
     }
 
     /**
@@ -93,7 +93,7 @@ class FuncionarioController extends Controller
         $dataForm['salario'] = $dataForm['hiddensalario'];
 
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
-        $dataForm['password'] = Hash::make(1234);
+        $dataForm['password'] = Hash::make($dataForm['password']);
 
         $insert = $this->funcionario->create($dataForm);
         if($insert)
@@ -127,7 +127,7 @@ class FuncionarioController extends Controller
         $funcionario = $this->funcionario->find($id);
         $filiais = $this->filial::all();
         $title = "Editar {$funcionario->nome}";
-        return view('funcionario.create-edit',compact('title','funcionario','filiais'));
+        return view('funcionario.edit',compact('title','funcionario','filiais'));
     }
 
     /**
@@ -141,6 +141,11 @@ class FuncionarioController extends Controller
     {
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
+
+        $dataForm['password'] == null ? $password = $funcionario->password :
+        $password = Hash::make($dataForm['password']);
+        $dataForm['password'] = $password;
+
         $update = $funcionario->update($dataForm);
         if( $update )
             return redirect()->route('funcionario.index');

@@ -1,6 +1,6 @@
 @extends('painel')
 
-@section('titulo','Visualizar Automovel')
+@section('titulo','Visualizar Automóvel')
 
 
 @section('content')
@@ -16,7 +16,7 @@
             <p><b>Categoria: </b>  {{$automovel->categoria}} </p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">
-                    <a href="{{ route('automovel.index') }}" class="btn btn-sucess form-control">Cancelar</a>
+                    <a href="{{ route('automovel.index') }}" class="btn btn-sucess form-control">Voltar</a>
                 </div>
             </div>
         </div> 

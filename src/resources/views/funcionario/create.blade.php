@@ -39,40 +39,35 @@
     </div>
 </div>
 <!-- Modal Fim -->
-@if ( isset($funcionario) )
-    <form action="{{ route('funcionario.update', $funcionario->id)}}" method="post">
-        {!! method_field('PUT') !!}
-@else
     <form action="{{ route('funcionario.store')}}" method="post">
-@endif
         <div class="form-group">
             @csrf
             <div class="row">
                 <div class="col-4">  
                     <label for="nome">Nome: </label>
-                    <input type="text"  class="form-control" name="nome" id="nome" value="{{ $funcionario->nome ?? old('nome') }}">
+                    <input type="text"  class="form-control" name="nome" id="nome" value="{{ old('nome') }}">
                 </div>
                 <div class="col-4">  
                     <label for="cpf">Cpf: </label>
-                    <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
+                    <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ old('cpf') }}">
                 </div>
                 <div class="col-4">
                     <label for="dtNacimento">Data Nascimento: </label>
-                    <input type="text"  class="form-control" data-js="dtNasc" name="dtNacimento" id="dtNacimento" maxlength="10" value="{{ $funcionario->dtNacimento ?? old('dtNacimento') }}">
+                    <input type="text"  class="form-control" data-js="dtNasc" name="dtNacimento" id="dtNacimento" maxlength="10" value="{{ old('dtNacimento') }}">
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-4">
                     <label for="endereco">Endereço: </label>
-                    <input type="text"  class="form-control" name="endereco" id="endereco" value="{{ $funcionario->endereco ?? old('endereco') }}">
+                    <input type="text"  class="form-control" name="endereco" id="endereco" value="{{  old('endereco') }}">
                 </div>
                 <div class="col-4">
                     <label for="cargo">Cargo: </label>
-                    <input type="text"  class="form-control" name="cargo" id="cargo" value="{{ $funcionario->cargo ?? old('cargo') }}">
+                    <input type="text"  class="form-control" name="cargo" id="cargo" value="{{ old('cargo') }}">
                 </div> 
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
-                    <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
+                    <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ old('salario') }}">
                     <input type="hidden" name="hiddensalario" data-js="hiddensalario"  >
                 </div>
             </div>
@@ -100,12 +95,12 @@
                 </div>
                 <div class="col-4">
                         <label for="password">Senha: </label>
-                        <input type="text"  class="form-control" name="password" id="password" value="{{ $funcionario->password ?? '1234' }}">
+                        <input type="text"  class="form-control" name="password" id="password" value="1234">
                 </div>
             </div>
             <div class="row">
                 <div class="col-4 form-check">
-                    <input type="checkbox" id="situacao" name="situacao" value="1" @if( isset($funcionario) && $funcionario->situacao == '1') checked @endif>
+                    <input type="checkbox" id="situacao" name="situacao" value="1" >
                     <label class="form-check-label" for="situacao">Ativo</label>
                 </div>
             </div>

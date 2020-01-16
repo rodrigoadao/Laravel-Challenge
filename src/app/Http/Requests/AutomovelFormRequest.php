@@ -25,18 +25,27 @@ class AutomovelFormRequest extends FormRequest
     {
         return [
             'nome'      => 'required|min:3',
-            'ano'       => 'required|min:3',
-            'modelo'    => 'required|min:3',
+            'ano'       => 'required|min:4',
+            'modelo'    => 'required|min:4',
             'cor'       => 'required|min:3',
-            'chassi'    => 'required|numeric',
+            'chassi'    => 'required|min:14',
             'categoria' => 'required',
         ];
     }
 
-
-    public function message(){
+    public function messages(){
         return[
-            'nome.required' => 'O campo nome é de preenchimento obrigatorio',
+            'nome.required'     => 'O campo nome é de preenchimento obrigatório.',
+            'nome.min'          => 'O campo nome deve conter mais que 3 caracteres.',
+            'ano.required'      => 'O campo ano é de preenchimento obrigatório.',
+            'ano.min'           => 'Ano inválido.',
+            'cor.required'      => 'O campo cor é de preechimento obrigatório.',
+            'cor.min'           => 'Cor inválida.',
+            'modelo.required'   => 'O campo modelo é de preenchimento obrigatório.',
+            'modelo.min'        => 'Modelo inválido.',
+            'chassi.required'   => 'O campo chassi é de preenchimento obrigatório.',
+            'chassi.min'        => 'Chassi inválido.',
+            'categoria.required'=> 'O campo categoria é de preenchimento obrigatório.'
         ];
     }
 }
