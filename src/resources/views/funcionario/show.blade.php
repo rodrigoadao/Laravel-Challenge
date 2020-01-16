@@ -1,7 +1,6 @@
 @extends('painel')
 
-@section('titulo','Visualizar Funcionario')
-
+@section('titulo','Visualizar Funcionário')
 
 @section('content')
     <div class="modal-content">

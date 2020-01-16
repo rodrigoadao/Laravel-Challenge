@@ -30,6 +30,9 @@ class FuncionarioController extends Controller
         $this->funcionario = $funcionario;
     }
 
+    public function main(){
+        return view('main');
+    }
     public function login()
     {
         return view('login');
@@ -50,7 +53,7 @@ class FuncionarioController extends Controller
         
         $credentials = ['cpf' => $cpf, 'password' => $password];
         if( Auth::guard('funcionario')->attempt($credentials) ){
-            return redirect()->route('funcionario.index');
+            return view('main');
         } else{
             return redirect()->route('login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
         }
@@ -59,7 +62,7 @@ class FuncionarioController extends Controller
     public function index()
     {
         $funcionarios = Funcionario::paginate($this->totalPage);
-        $title = 'Listagem do Funcionario';
+        $title = 'Listagem dos Funcionários';
         return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 

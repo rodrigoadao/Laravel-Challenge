@@ -1,5 +1,6 @@
 @extends('painel')
 
+@section('title','Listagem de Funcionários')
 @section('titulo','Funcionários Cadastrados')
 
 @section('content')

@@ -112,12 +112,12 @@
         </div>
         <div class="row justify-content-end mt-5">
             <div class="col-2 mr-3" >
-                <a href="{{ route('funcionario.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('main') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3 ">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>
             </div>
-        </div>
+        </div>  
     </form>         
 </div>
 @endsection
