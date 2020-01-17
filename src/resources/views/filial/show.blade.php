@@ -14,7 +14,7 @@
             <p><b>CNPJ: </b>  {{$filial->cnpj}} </p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">
-                    <a href="{{ route('filial.index') }}" class="btn btn-sucess form-control">Cancelar</a>
+                    <a href="{{ route('filial.index') }}" class="btn btn-sucess form-control">Voltar</a>
                 </div>
             </div>
         </div> 

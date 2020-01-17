@@ -1,7 +1,6 @@
 @extends('painel')
 
-@section('titulo','Visualizar Filial')
-
+@section('titulo','Visualizar Funcionário')
 
 @section('content')
     <div class="modal-content">
@@ -18,7 +17,7 @@
             <p><b>Situação: </b>  {{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }} </p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">
-                    <a href="{{ route('funcionario.index') }}" class="btn btn-sucess form-control">Cancelar</a>
+                    <a href="{{ route('funcionario.index') }}" class="btn btn-sucess form-control">Voltar</a>
                 </div>
             </div>
         </div> 

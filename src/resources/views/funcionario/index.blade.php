@@ -1,6 +1,7 @@
 @extends('painel')
 
-@section('titulo','Funcionarios Cadastrados')
+@section('title','Listagem de Funcionários')
+@section('titulo','Funcionários Cadastrados')
 
 @section('content')
   <div class="modal-content">
@@ -16,41 +17,38 @@
       </div>
       <hr>
       <table class="table">
-          <caption>Lista de Funcionarios</caption>
           <thead class="table-dark">
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Data nascimento</th>
-              <th scope="col">Sexo</th>
-              <th scope="col">CPF</th>
-              <th scope="col">Endereço</th>
-              <th scope="col">Cargo</th>
-              <th scope="col">Salário</th>
-              <th scope="col">Situação</th>
-              <th scope="col">Ações</th>
+              <th class=" width-30" scope="col">Nome</th>
+              {{-- <th class="hcenter width-10" scope="col">Data nascimento</th>
+              <th class="hcenter width-10" scope="col">Sexo</th> --}}
+              <th class="hcenter width-20" scope="col">CPF</th>
+              {{-- <th class="hcenter width-10" scope="col">Endereço</th> --}}
+              <th class="hcenter width-15" scope="col">Cargo</th>
+              {{-- <th class="hcenter width-10" scope="col">Salário</th> --}}
+              <th class="hcenter width-15" scope="col">Situação</th>
+              <th class="hcenter width-20" scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
             @foreach ( $funcionarios as $funcionario )
               <tr row @if ($funcionario->situacao == 0 ) disable @endif>
-                <th scope="row">{{ $funcionario->id }}</th>
                 <td>{{ $funcionario->nome }}</td>
-                <td>{{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y') }}</td>
-                <td>{{ $funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }}</td>
-                <td>{{ $funcionario->cpf  }}</td>
-                <td>{{ $funcionario->endereco }}</td>
-                <td>{{ $funcionario->cargo }}</td>
-                <td>{{ $funcionario->salario }}</td>
-                <td>{{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }}</td>
-                <td class="img-commandsFunc">
-                  <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img src="../img/view.svg" alt=""></a>
+                {{-- <td>{{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y') }}</td>
+                <td>{{ $funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }}</td> --}}
+                <td class="hcenter">{{ $funcionario->cpf  }}</td>
+                {{-- <td>{{ $funcionario->endereco }}</td> --}}
+                <td class="hcenter">{{ $funcionario->cargo }}</td>
+                {{-- <td>{{ $funcionario->salario }}</td> --}}
+                <td class="hcenter">{{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }}</td>
+                <td class="img-commandsFunc hcenter">
+                  <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img id="teste" src="../img/view.svg" alt=""></a>
                   <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" alt=""></a>
-                  <a href="{{ route('funcionario.delete', $funcionario->id) }}"><img src="../img/delete.svg" alt=""></a>
+                  <a data-js="delete" href="{{ route('funcionario.delete', $funcionario->id) }}"><img src="../img/delete.svg" alt=""></a>
                   @if ($funcionario->situacao == 0 )
-                    <a href="{{ route('funcionario.active', $funcionario->id) }}"><img src="../img/enable.svg" alt=""></a>
+                    <a  data-js="active" href="{{ route('funcionario.active', $funcionario->id) }}"><img src="../img/enable.svg" alt=""></a>
                   @else
-                    <a href="{{ route('funcionario.disable', $funcionario->id) }}"><img src="../img/disable.svg" alt=""></a>
+                    <a  data-js="disable" href="{{ route('funcionario.disable', $funcionario->id) }}"><img src="../img/disable.svg" alt=""></a>
                   @endif    
                 </td>
               </tr>
@@ -64,4 +62,7 @@
 @endsection
 @push('styles')
     <link href="/css/index.css" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endpush

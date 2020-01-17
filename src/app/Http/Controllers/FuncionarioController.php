@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FuncionarioFormRequest;
+use App\Http\Requests\FuncionarioEditRequest;
 use Illuminate\Http\Request;
 use App\Models\Funcionario;
 use App\Models\Filial;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FuncionarioCreateRequest;
 use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller
@@ -28,6 +30,9 @@ class FuncionarioController extends Controller
         $this->funcionario = $funcionario;
     }
 
+    public function main(){
+        return view('main');
+    }
     public function login()
     {
         return view('login');
@@ -48,7 +53,7 @@ class FuncionarioController extends Controller
         
         $credentials = ['cpf' => $cpf, 'password' => $password];
         if( Auth::guard('funcionario')->attempt($credentials) ){
-            return redirect()->route('funcionario.index');
+            return view('main');
         } else{
             return redirect()->route('login')->withErrors(['errors' => 'LOGIN INVÁLIDO'])->withInput();
         }
@@ -57,7 +62,7 @@ class FuncionarioController extends Controller
     public function index()
     {
         $funcionarios = Funcionario::paginate($this->totalPage);
-        $title = 'Listagem do Funcionario';
+        $title = 'Listagem dos Funcionários';
         return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 
@@ -70,7 +75,7 @@ class FuncionarioController extends Controller
     {
         $filiais = $this->filial::all();
         $title = 'Cadastrar Funcionario';
-        return view('funcionario.create-edit',compact('filiais','title'));
+        return view('funcionario.create',compact('filiais','title'));
     }
 
     /**
@@ -79,16 +84,16 @@ class FuncionarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FuncionarioFormRequest $request)
+    public function store(FuncionarioCreateRequest $request)
     {
         $dataForm = $request->all();
 
         $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
         $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
-
+        $dataForm['salario'] = $dataForm['hiddensalario'];
 
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
-        $dataForm['password'] = Hash::make(1234);
+        $dataForm['password'] = Hash::make($dataForm['password']);
 
         $insert = $this->funcionario->create($dataForm);
         if($insert)
@@ -122,7 +127,7 @@ class FuncionarioController extends Controller
         $funcionario = $this->funcionario->find($id);
         $filiais = $this->filial::all();
         $title = "Editar {$funcionario->nome}";
-        return view('funcionario.create-edit',compact('title','funcionario','filiais'));
+        return view('funcionario.edit',compact('title','funcionario','filiais'));
     }
 
     /**
@@ -132,10 +137,15 @@ class FuncionarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FuncionarioFormRequest $request, $id)
+    public function update(FuncionarioEditRequest $request, $id)
     {
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
+
+        $dataForm['password'] == null ? $password = $funcionario->password :
+        $password = Hash::make($dataForm['password']);
+        $dataForm['password'] = $password;
+
         $update = $funcionario->update($dataForm);
         if( $update )
             return redirect()->route('funcionario.index');

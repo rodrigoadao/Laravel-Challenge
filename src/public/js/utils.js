@@ -56,9 +56,70 @@
         }
     }
 
+    function confirm(datajs,msg){
+        var $btw = document.querySelectorAll(datajs);
+        if($btw){
+            Array.prototype.forEach.call($btw,function(element){
+                console.log(element)
+                element.addEventListener('click',function(e){
+                    e.preventDefault()
+                    if(showMessage(msg)){
+                        console.log('testeShow')
+                        window.location.href = element.href
+                     }
+                })
+            })
+        }
+    }
+    function showMessage(msg){
+        return window.confirm(msg)
+    }
+
+    function apenasNumeros(datajs,){
+        var $input = document.querySelector(datajs)
+        var regex = new RegExp(/^[0-9.]+/)
+        if($input){
+            $input.addEventListener('input',function(e){
+                if(!regex.test(e.data)){
+                    var index = $input.value.length -1
+                    $input.value = $input.value.replace($input.value.charAt(index),'')
+                }
+                    
+            })
+        }
+    }
+
+    function formatarSalario(){
+        var $salario = document.querySelector('[data-js="salario"]')
+        var $hidden = document.querySelector('[data-js="hiddensalario"]')
+        if($salario){
+            $salario.addEventListener('input',function(e){
+                var regex = new RegExp(/\D+/g)
+                $hidden.value += e.data.replace(regex,'')
+                console.log($hidden.value)
+                $salario.value = arraySalario($hidden.value)
+            })
+        }
+    }
+
+    function arraySalario(valores){
+        return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
+    }
+
     CPF()
     Data()
     CNPJ()
     InscricaoEstadual()
+    confirm('[data-js="delete"]','Deseja remover este registro?')
+    confirm('[data-js="active"]','Deseja ativar este registro?')
+    confirm('[data-js="disable"]','Deseja desativar este registro?')
+    apenasNumeros('[data-js="cpf"]')
+    apenasNumeros('[data-js="dtNasc"]')
+    apenasNumeros('[data-js="hiddensalario"')
+    apenasNumeros('[data-js="salario"]')
+    apenasNumeros('[data-js="cnpj"]')
+    apenasNumeros('[data-js="ie"]')
+    formatarSalario()
     
 }())
+

@@ -18,6 +18,8 @@ Route::group(['middleware' => 'funcionario'], function(){
     Route::get('/admin/logout','FuncionarioController@logout')->name('funcionario.logout');
     
     Route::group(['middleware' => 'auth:funcionario'], function(){
+        Route::get('principal','FuncionarioController@main')->name('main');
+
         Route::resource('automovel','AutomovelController');
         Route::resource('filial','FilialController');
         Route::resource('funcionario','FuncionarioController');

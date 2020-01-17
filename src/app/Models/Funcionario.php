@@ -12,11 +12,11 @@ class Funcionario extends Authenticatable
     use Notifiable;
     protected $table = 'funcionario';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public function filial()
+    {
+        return $this->belongsTo('App\Models\Filial','filial_id1');
+    }
+
     protected $fillable = [
         'filial_id',
         'nome',

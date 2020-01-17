@@ -8,6 +8,11 @@ class Automovel extends Model
 {
     protected $table = 'automovel';
 
+    public function filial()
+    {
+        return $this->belongsTo('App\Models\Filial','filial_id1');
+    }
+
     protected $fillable = [
         'filial_id',
         'nome',
