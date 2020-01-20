@@ -106,6 +106,35 @@
         return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
     }
 
+    function PesquisaSubmit(){
+        var $button = document.querySelector('[data-js="imgSubmit"]')
+        var $form = document.querySelector('[data-js="formPesq"]')
+        console.log($button)
+        if($button){
+            $button.addEventListener('click',function(e){
+                $form.submit()
+            })
+        }
+    }
+
+    function selectAll(){
+        var $checkAll = document.querySelector('[data-js="selectAll"]')
+        var $check = document.querySelectorAll('[data-js="select"]')
+        $checkAll.addEventListener('click', function(e){
+            tableChecked($check)
+        })
+    }
+
+    function tableChecked(param){
+        Array.prototype.forEach.call(param,function(element,index,array){
+            element.toggleAttribute('checked')
+            var $tr = element.closest('tr')
+            $tr.toggleAttribute('checked')
+        })
+    }
+
+
+
     CPF()
     Data()
     CNPJ()
@@ -120,6 +149,8 @@
     apenasNumeros('[data-js="cnpj"]')
     apenasNumeros('[data-js="ie"]')
     formatarSalario()
+    PesquisaSubmit()
+    selectAll()
     
 }())
 

@@ -30,6 +30,12 @@ class FilialController extends Controller
         return view('filial.index',compact('filiais','title'));
     }
 
+    public function search(Request $request){
+        $dataQuery = $request->all();
+        $filiais = Filial::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        return view('filial.index', ['filiais' => $filiais]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

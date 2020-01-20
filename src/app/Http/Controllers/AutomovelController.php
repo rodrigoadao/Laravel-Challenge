@@ -27,6 +27,13 @@ class AutomovelController extends Controller
         return view('automovel.index', compact('automoveis','title'));
     }
 
+    public function search(Request $request){
+        $dataQuery = $request->all();
+        $automoveis = Automovel::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        $title = 'Listagem dos Automovéis';
+        return view('automovel.index', ['automoveis' => $automoveis], compact('title'));
+    }
+
     public function show($id){
         $automovel = $this->automovel->find($id);
         $title = "Filial: {$automovel->nome}";

@@ -7,9 +7,11 @@
   <div class="modal-content">
       <div class="row justify-content-end my-3">
             <div class="col-6">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2 col-8" type="search" placeholder="Search" aria-label="Search">
-                <a href=""><img src="../img/pesquisar.svg" alt=""></a>
+              <form class="form-inline"  data-js="formPesq" action="{{ route('funcionario.search') }}" method="POST">
+                @csrf
+                <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Search" aria-label="Search">
+                <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
+              </form>
             </div>
             <div class="col-2 ">
               <a href="{{ route('funcionario.create')}}" class="btn btn-sucess form-control">Novo</a>
@@ -17,8 +19,12 @@
       </div>
       <hr>
       <table class="table">
+         @if ($funcionarios->items() == null)
+             <caption>Nenhum registro encontrado!</caption>
+         @endif
           <thead class="table-dark">
             <tr>
+              <th class="hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
               <th class=" width-30" scope="col">Nome</th>
               {{-- <th class="hcenter width-10" scope="col">Data nascimento</th>
               <th class="hcenter width-10" scope="col">Sexo</th> --}}
@@ -33,6 +39,7 @@
           <tbody>
             @foreach ( $funcionarios as $funcionario )
               <tr row @if ($funcionario->situacao == 0 ) disable @endif>
+                <td><input type="checkbox" data-js="select" class="select" id=""></td>
                 <td>{{ $funcionario->nome }}</td>
                 {{-- <td>{{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y') }}</td>
                 <td>{{ $funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }}</td> --}}

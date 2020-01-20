@@ -5,9 +5,16 @@
 @section('content')
 <div class="modal-content">
   <div class="row justify-content-end my-3">
-          <div class="col-2 ">
-          <a href="{{ route('automovel.create')}}" class="btn btn-sucess form-control">Novo</a>
-          </div>
+      <div class="col-6">
+        <form class="form-inline"  data-js="formPesq" action="{{ route('automovel.search') }}" method="POST">
+          @csrf
+          <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Search" aria-label="Search">
+          <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
+        </form>
+      </div>
+      <div class="col-2 ">
+        <a href="{{ route('automovel.create')}}" class="btn btn-sucess form-control">Novo</a>
+      </div>
   </div>
   <hr>
     <table class="table">

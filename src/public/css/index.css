@@ -74,6 +74,11 @@ div .paginacao > nav {
     background-color: #ff6347ad;
 }
 
+[row][checked]{
+    background-color: #6ac9c9;
+    color: black;
+}
+
 td  a  img{
     transition: all 0.45s ease;
 }
@@ -91,3 +96,24 @@ td > a > img:hover{
 .width-60{ width: 60%;}
 .width-70{ width: 70%;}
 .width-80{ width: 80%;}
+
+.botao
+{
+    width: 40px;
+}
+
+.botao:hover{
+    cursor: pointer;
+}
+
+.selectAll{
+    width: 20px;
+    height: 20px;
+}
+
+.select{
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+}
+

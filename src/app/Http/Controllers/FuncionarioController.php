@@ -59,13 +59,19 @@ class FuncionarioController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $funcionarios = Funcionario::paginate($this->totalPage);
         $title = 'Listagem dos Funcionários';
         return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 
+    public function search(Request $request){
+        $dataQuery = $request->all();
+        $funcionarios = Funcionario::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        $title = 'Listagem dos Funcionários';
+        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
+    }
     /**
      * Show the form for creating a new resource.
      *

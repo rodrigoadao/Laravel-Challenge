@@ -30,6 +30,10 @@ Route::group(['middleware' => 'funcionario'], function(){
 
         Route::get('funcionario/active/{id}','FuncionarioController@active')->name('funcionario.active');
         Route::get('funcionario/disable/{id}','FuncionarioController@disable')->name('funcionario.disable');
+
+        Route::post('funcionario/search','FuncionarioController@search')->name('funcionario.search');
+        Route::post('automovel/search','AutomovelController@search')->name('automovel.search');
+        Route::post('filial/search','FilialController@search')->name('filial.search');
     });
 });
 
