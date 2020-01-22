@@ -83,4 +83,9 @@
 @endpush
 @push('scripts')
     <script src="{{ asset('js/utils.js') }}"></script>
+    <script>
+        jQuery(function($){
+          $('#cnpj').mask('00.000.000/0000-00', {reverse: true})
+        })
+      </script>
 @endpush

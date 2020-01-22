@@ -121,4 +121,12 @@
 @endpush
 @push('scripts')
     <script src="{{ asset('js/utils.js') }}"></script>
+    <script>
+        jQuery(function($){
+          $('#dtNacimento').mask('00/00/0000');
+          $('#cpf').mask('000.000.000-00', {reverse: true});
+          $('#dtNacimento').mask('00/00/0000');
+          $('#salario').mask("#.##0,00", {reverse: true})
+        })
+      </script>
 @endpush

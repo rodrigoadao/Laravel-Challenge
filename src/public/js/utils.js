@@ -14,19 +14,19 @@
         }
     }
 
-    function Data($data){
-        var $data = document.querySelector('[data-js="dtNasc"]')
-        if($data){
-            $data.addEventListener('input',function(e){
-                $data.value = formatarData($data.value)
-            })
-            function formatarData(data){
-                var newDATA
-                newDATA = data.replace(/(\d{2})(\d{2})(\d{4})/,"$1/$2/$3")
-                return newDATA
-            }
-        }
-    }
+    // function Data($data){
+    //     var $data = document.querySelector('[data-js="dtNasc"]')
+    //     if($data){
+    //         $data.addEventListener('input',function(e){
+    //             $data.value = formatarData($data.value)
+    //         })
+    //         function formatarData(data){
+    //             var newDATA
+    //             newDATA = data.replace(/(\d{2})(\d{2})(\d{4})/,"$1/$2/$3")
+    //             return newDATA
+    //         }
+    //     }
+    // }
 
     function CNPJ($CNPJ){
         var $CNPJ = document.querySelector('[data-js="cnpj"]')
@@ -122,22 +122,22 @@
         }
     }
 
-    function formatarSalario(){
-        var $salario = document.querySelector('[data-js="salario"]')
-        var $hidden = document.querySelector('[data-js="hiddensalario"]')
-        if($salario){
-            $salario.addEventListener('input',function(e){
-                var regex = new RegExp(/\D+/g)
-                $hidden.value += e.data.replace(regex,'')
-                console.log($hidden.value)
-                $salario.value = arraySalario($hidden.value)
-            })
-        }
-    }
+    // function formatarSalario(){
+    //     var $salario = document.querySelector('[data-js="salario"]')
+    //     var $hidden = document.querySelector('[data-js="hiddensalario"]')
+    //     if($salario){
+    //         $salario.addEventListener('change',function(e){
+    //             console.log()
+    //             var regex = new RegExp(/\D+/g)
+    //             $hidden.value = e.target.value.replace(regex,'')
+    //             $salario.value = arraySalario($hidden.value)
+    //         })
+    //     }
+    // }
 
-    function arraySalario(valores){
-        return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
-    }
+    // function arraySalario(valores){
+    //     return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
+    // }
 
     function PesquisaSubmit(){
         var $button = document.querySelector('[data-js="imgSubmit"]')
@@ -216,7 +216,6 @@
 
     function gerarDocumento(btn){
         var $btn = document.querySelector(btn);
-        console.log($btn.value)
         if($btn){
             $btn.addEventListener('click',function(e){
                 var $check = document.querySelectorAll('[data-js="select"]')
@@ -230,7 +229,7 @@
 
 
     CPF()
-    Data()
+    //Data()
     CNPJ()
     InscricaoEstadual()
     confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')

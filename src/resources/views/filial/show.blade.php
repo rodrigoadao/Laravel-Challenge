@@ -10,7 +10,7 @@
             <p><b>Nome: </b>  {{$filial->nome}} </p>
             <p><b>Endereço: </b>  {{$filial->endereco}} </p>
             <p><b>Insc. Estadual: </b> {{$filial->ie}} </p>
-            <p><b>CNPJ: </b>  {{$filial->cnpj}} </p>
+            <p><b>CNPJ: </b> <span id="cnpj">{{$filial->cnpj}}</span></p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">
                     <a href="{{ route('filial.index') }}" class="btn btn-sucess form-control">Voltar</a>
@@ -19,6 +19,11 @@
         </div> 
     </div>
 @endsection
-@push('styles')
-    <link href="/css/create.css" rel="stylesheet" type="text/css">
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
+    <script>
+        jQuery(function($){
+          $('#cnpj').mask('00.000.000/0000-00', {reverse: true})
+        })
+      </script>
 @endpush

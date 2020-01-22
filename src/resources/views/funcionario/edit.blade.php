@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-4">  
                     <label for="cpf">Cpf: </label>
-                    <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
+                    <input type="text"  class="form-control"  maxlength="14" name="cpf" id="cpf" value="{{ $funcionario->cpf ?? old('cpf') }}">
                 </div>
                 <div class="col-4">
                     <label for="dtNacimento">Data Nascimento: </label>
@@ -73,7 +73,6 @@
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
                     <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ $funcionario->salario ?? old('salario') }}">
-                    <input type="hidden" name="hiddensalario" data-js="hiddensalario"  >
                 </div>
             </div>
             <div class="row mt-4">
@@ -132,4 +131,12 @@
 @endpush
 @push('scripts')
     <script src="{{ asset('js/utils.js') }}"></script>
+    <script>
+        jQuery(function($){
+          $('#dtNacimento').mask('00/00/0000');
+          $('#cpf').mask('000.000.000-00', {reverse: true});
+          $('#dtNacimento').mask('00/00/0000');
+          $('#salario').mask("#.##0,00", {reverse: true})
+        })
+      </script>
 @endpush
