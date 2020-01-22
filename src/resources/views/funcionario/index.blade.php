@@ -5,7 +5,28 @@
 
 @section('content')
   <div class="modal-content">
-      <div class="row justify-content-end my-3 search">
+    <!-- Modal -->
+    <div class="modal fade" data-js="modal" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content" >
+          <div class="modal-header" >
+            <h4 class="modal-title" style="margin-left: 25%" data-js="modal-title"  id="exampleModalLabel"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" data-js="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-js="btnFechar" data-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" data-js="btnConfirm">Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END Modal -->
+    <div class="row justify-content-end my-3 search">
             <div class="col-6">
               <form class="form-inline"  data-js="formPesq" action="{{ route('funcionario.search') }}" method="POST">
                 @csrf
@@ -49,14 +70,16 @@
                 {{-- <td>{{ $funcionario->salario }}</td> --}}
                 <td class="hcenter">{{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }}</td>
                 <td class="img-commandsFunc hcenter">
-                  <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img id="teste" src="../img/view.svg" title="visualizar"></a>
-                  <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" title="alterar"></a>
-                  <a data-js="delete" href="{{ route('funcionario.delete', $funcionario->id) }}"><img src="../img/delete.svg" title="deletar"></a>
-                  @if ($funcionario->situacao == 0 )
-                    <a  data-js="active" href="{{ route('funcionario.active', $funcionario->id) }}"><img src="../img/enable.svg" title="habilitar"></a>
-                  @else
-                    <a  data-js="disable" href="{{ route('funcionario.disable', $funcionario->id) }}"><img src="../img/disable.svg" title="disabilitar"></a>
-                  @endif    
+                  <form class="form-inline" action="" data-js="formActions">
+                    <a href="{{ route('funcionario.show', $funcionario->id ) }}"><img id="teste" src="../img/view.svg" title="visualizar"></a>
+                    <a href="{{ route('funcionario.edit', $funcionario->id ) }}"><img src="../img/update.svg" title="alterar"></a>
+                    <a data-js="delete" href="{{ route('funcionario.delete', $funcionario->id) }}"><img src="../img/delete.svg" title="deletar"></a>
+                    @if ($funcionario->situacao == 0 )
+                      <a  data-toggle="modal" data-target="#exampleModal" data-js="active" href="{{ route('funcionario.active', $funcionario->id) }}"><img src="../img/enable.svg" title="habilitar"></a>
+                    @else
+                      <a  data-js="disable" href="{{ route('funcionario.disable', $funcionario->id) }}"><img src="../img/disable.svg" title="desabilitar"></a>
+                    @endif  
+                  </form>
                 </td>
               </tr>
             @endforeach
@@ -67,10 +90,10 @@
         </div>
         <div class="row justify-content-end">
           <div>
-            <button data-js="Excel" class="btn btn-sucess form-control exportar" type="submit">Exportar Excel</button>
+            <button data-js="Excel" class="btn btn-sucess form-control exportar" value="Excel" type="submit">Exportar Excel</button>
           </div>
           <div>
-            <button data-js="Pdf" class="btn btn-sucess form-control exportar" type="submit">Exportar PDF</button>
+            <button data-js="Pdf" class="btn btn-sucess form-control exportar"  value="Pdf" type="submit">Exportar PDF</button>
           </div>
         </div>
   </div>

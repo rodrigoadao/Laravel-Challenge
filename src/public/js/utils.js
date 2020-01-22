@@ -56,23 +56,57 @@
         }
     }
 
-    function confirm(datajs,msg){
-        var $btw = document.querySelectorAll(datajs);
-        if($btw){
-            Array.prototype.forEach.call($btw,function(element){
-                console.log(element)
+    function exibirModal($modal,msg,title){
+        var $bodyModal = document.querySelector('[data-js="modal-body"]')
+        var $titleModal = document.querySelector('[data-js="modal-title"]')
+        $bodyModal.innerHTML = msg
+        $titleModal.innerHTML = title
+        $modal.classList.add('show')
+        $modal.style.display = 'block'
+        fecharModal($modal)
+    }
+
+    function confirmAction(element){
+        var $actionConfirm = document.querySelector('[data-js="btnConfirm"]')
+        var $form = document.querySelector('[data-js="formActions"]')
+        if($actionConfirm){
+            $actionConfirm.style.display = 'block'
+            $actionConfirm.addEventListener('click',function(e){
+                $form.action = element.href
+                $form.submit()
+            })
+        }
+    }
+
+    function fecharModal(modal){
+        var $btnFechar = document.querySelector('[data-js="btnFechar"]')
+        $btnFechar.addEventListener('click',function(e){
+            modal.classList.remove('show');
+            modal.style.display = 'none'
+        })
+    }
+
+    function confirmModal(datajs,msg,title){
+        var $action = document.querySelectorAll(datajs)
+        var $modal = document.querySelector('[data-js="modal"]')
+        if($action){
+            Array.prototype.forEach.call($action,function(element){
                 element.addEventListener('click',function(e){
                     e.preventDefault()
-                    if(showMessage(msg)){
-                        window.location.href = element.href
-                     }
+                    exibirModal($modal,msg,title)
+                    confirmAction(element);
                 })
             })
         }
     }
-    function showMessage(msg){
-        return window.confirm(msg)
+
+    function alertModal(msg,title){
+        var $modal = document.querySelector('[data-js="modal"]')
+        var $actionConfirm = document.querySelector('[data-js="btnConfirm"]')
+        $actionConfirm.style.display = 'none'
+        exibirModal($modal,msg,title)
     }
+    
 
     function apenasNumeros(datajs,){
         var $input = document.querySelector(datajs)
@@ -108,38 +142,11 @@
     function PesquisaSubmit(){
         var $button = document.querySelector('[data-js="imgSubmit"]')
         var $form = document.querySelector('[data-js="formPesq"]')
-        console.log($button)
         if($button){
             $button.addEventListener('click',function(e){
                 $form.submit()
             })
         }
-    }
-
-    function selectAll(){
-        var $checkAll = document.querySelector('[data-js="selectAll"]')
-        var $check = document.querySelectorAll('[data-js="select"]')
-        if($checkAll){
-            $checkAll.addEventListener('change', function(e){
-                if($checkAll.checked === true){
-                    activeAll($check)
-                }else{
-                    desativeAll($check)
-                }
-            })
-        }
-
-
-        Array.prototype.forEach.call($check,function(element,index,array){
-            element.addEventListener('click',function(e){
-                toggleCheckIndividual(element)
-                var resultado = Array.prototype.some.call($check,function(element,index,array){
-                    return element.checked
-                })
-                if(!resultado)
-                    $checkAll.checked = false
-            })
-        })
     }
 
     function toggleCheckIndividual(param){
@@ -171,39 +178,64 @@
         })
     }
 
-    function gerarPDF(){
-        var $btnPdf = document.querySelector('[data-js="Pdf"]');
-        if($btnPdf){
-            $btnPdf.addEventListener('click',function(e){
-                var $check = document.querySelectorAll('[data-js="select"]')
-                if(!verifyChecked($check))
-                    return alert('Nenhum registro selecionado!')
-                window.print()
+    function selectAll(){
+        var $checkAll = document.querySelector('[data-js="selectAll"]')
+        var $check = document.querySelectorAll('[data-js="select"]')
+        if($checkAll){
+            $checkAll.addEventListener('change', function(e){
+                if($checkAll.checked === true){
+                    activeAll($check)
+                }else{
+                    desativeAll($check)
+                }
             })
         }
-    }   
+        Array.prototype.forEach.call($check,function(element,index,array){
+            element.addEventListener('click',function(e){
+                toggleCheckIndividual(element)
+                var resultado = Array.prototype.some.call($check,function(element,index,array){
+                    return element.checked
+                })
+                if(!resultado)
+                    $checkAll.checked = false
+            })
+        })
+    }
+
     
+
     function verifyChecked(param){
         return Array.prototype.some.call(param,function(element,index,array){
             return element.checked
         })
     }
 
-    // document.onclick = function( e ){
-    //     myFunction();
-    // }
-       
-    // function myFunction() {
-    //     window.open("http://google.com.br", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=1, left=1, width=100, height=100px");
-    // }
+    function gerarPDF(){
+        window.print()
+    }
+
+    function gerarDocumento(btn){
+        var $btn = document.querySelector(btn);
+        console.log($btn.value)
+        if($btn){
+            $btn.addEventListener('click',function(e){
+                var $check = document.querySelectorAll('[data-js="select"]')
+                if(!verifyChecked($check))
+                    return alertModal('Nenhum registro foi selecionado.','Erro ao gerar documento')
+                $btn.value === 'Pdf' ? gerarPDF()  : alert('vai ser implementado')
+            })
+        }
+    } 
+
+
 
     CPF()
     Data()
     CNPJ()
     InscricaoEstadual()
-    confirm('[data-js="delete"]','Deseja remover este registro?')
-    confirm('[data-js="active"]','Deseja ativar este registro?')
-    confirm('[data-js="disable"]','Deseja desativar este registro?')
+    confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')
+    confirmModal('[data-js="active"]','Deseja ativar este registro?','Ativando registro')
+    confirmModal('[data-js="disable"]','Deseja desativar este registro?','Desativando registro!')
     apenasNumeros('[data-js="cpf"]')
     apenasNumeros('[data-js="dtNasc"]')
     apenasNumeros('[data-js="hiddensalario"')
@@ -213,8 +245,29 @@
     formatarSalario()
     PesquisaSubmit()
     selectAll()
-    gerarPDF()
+    gerarDocumento('[data-js="Pdf"]')
+    gerarDocumento('[data-js="Excel"]')
 
+    
     
 }())
 
+
+
+// function confirm(datajs,msg){
+//     var $btw = document.querySelectorAll(datajs);
+//     if($btw){
+//         Array.prototype.forEach.call($btw,function(element){
+//             console.log(element)
+//             element.addEventListener('click',function(e){
+//                 e.preventDefault()
+//                 if(showMessage(msg)){
+//                     window.location.href = element.href
+//                  }
+//             })
+//         })
+//     }
+// }
+// function showMessage(msg){
+//     return window.confirm(msg)
+// }

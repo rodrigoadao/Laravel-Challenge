@@ -4,6 +4,27 @@
 
 @section('content')
 <div class="modal-content">
+  <!-- Modal -->
+  <div class="modal fade" data-js="modal" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" >
+        <div class="modal-header">
+          <h4 class="modal-title"  style="margin-left: 25%" data-js="modal-title"  id="exampleModalLabel"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" data-js="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-js="btnFechar" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" data-js="btnConfirm">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END Modal -->
   <div class="row justify-content-end my-3">
       <div class="col-6">
         <form class="form-inline"  data-js="formPesq" action="{{ route('automovel.search') }}" method="POST">
@@ -39,9 +60,11 @@
                 <td class="hcenter" >{{ $automovel->chassi }}</td>
                 <td class="hcenter" >{{ $automovel->categoria }}</td>
                 <td class="img-commands hcenter">
-                  <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
-                  <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" title="alterar"></a>
-                  <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" title="deletar"></a>
+                  <form class="form-inline" action="" data-js="formActions">
+                    <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
+                    <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" title="alterar"></a>
+                    <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" title="deletar"></a>
+                  </form>
               </td>
               </tr>
           @endforeach
