@@ -6,7 +6,6 @@
     <div class="modal-content">
         <div class="form-group">
             <h1 class="title-pg"><b>{{$funcionario->nome}}</b></h1>
-            <p><b>ID: </b> {{$funcionario->id}} </p>
             <p><b>Nome: </b>  {{$funcionario->nome}} </p>
             <p><b>Endereço: </b>  {{$funcionario->endereco}} </p>
             <p><b>Data Nascimento: </b> {{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y')}} </p>

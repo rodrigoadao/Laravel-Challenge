@@ -106,7 +106,7 @@
                 </div>
                 <div class="col-4">
                         <label for="password">Senha: </label>
-                        <input type="text"  class="form-control" name="password" id="password">
+                        <input type="password"  class="form-control" name="password" id="password">
                 </div>
             </div>
             <div class="row">

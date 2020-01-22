@@ -33,7 +33,14 @@ class FilialFormRequest extends FormRequest
 
     public function messages(){
         return[
-            'nome.required' => 'O campo nome é de preenchimento obrigatorio',
+            'nome.required'     => 'O campo nome é de preenchimento obrigatório.',
+            'nome.min'          => 'Nome inválido.',
+            'endereco.required' => 'O campo nome é de preenchimento obrigatório.',
+            'endereco'          => 'Endereço inválido.',
+            'ie.required'       => 'O campo inscrição estadual é de preenchimento obrigatório.',
+            'ie.numeric'        => 'Inscrição estadual inválida.',
+            'cnpj.required'     => 'O campo cnpj é de preenchimento obrigatório.',
+            'cnpj.numeric'      => 'Cnpj inválido.'
         ];
     }
 }

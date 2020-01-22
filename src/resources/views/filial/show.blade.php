@@ -7,7 +7,6 @@
     <div class="modal-content">
         <div class="form-group">
             <h1 class="title-pg"><b>{{$filial->nome}}</b></h1>
-            <p><b>ID: </b> {{$filial->id}} </p>
             <p><b>Nome: </b>  {{$filial->nome}} </p>
             <p><b>Endereço: </b>  {{$filial->endereco}} </p>
             <p><b>Insc. Estadual: </b> {{$filial->ie}} </p>

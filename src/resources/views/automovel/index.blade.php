@@ -8,7 +8,7 @@
       <div class="col-6">
         <form class="form-inline"  data-js="formPesq" action="{{ route('automovel.search') }}" method="POST">
           @csrf
-          <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Search" aria-label="Search">
+          <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" aria-label="Search">
           <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
         </form>
       </div>
@@ -33,15 +33,15 @@
           @foreach ( $automoveis as $automovel )
               <tr row >
                 <td>{{ $automovel->nome }}</td>
-                <td>{{ $automovel->ano}}</td>
-                <td>{{ $automovel->modelo }}</td>
-                <td>{{ $automovel->cor }}</td>
-                <td>{{ $automovel->chassi }}</td>
-                <td>{{ $automovel->categoria }}</td>
-                <td class="img-commands">
-                  <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" alt="view"></a>
-                  <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" alt="update"></a>
-                  <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" alt="delete"></a>
+                <td class="hcenter" >{{ $automovel->ano}}</td>
+                <td class="hcenter" >{{ $automovel->modelo }}</td>
+                <td class="hcenter" >{{ $automovel->cor }}</td>
+                <td class="hcenter" >{{ $automovel->chassi }}</td>
+                <td class="hcenter" >{{ $automovel->categoria }}</td>
+                <td class="img-commands hcenter">
+                  <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
+                  <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" title="alterar"></a>
+                  <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" title="deletar"></a>
               </td>
               </tr>
           @endforeach

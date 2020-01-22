@@ -100,7 +100,7 @@
         </div>
         <div class="row justify-content-md-end">
             <div class="col-2 mr-3">
-                <a href="{{ route('main') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('automovel.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>

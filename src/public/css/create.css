@@ -47,4 +47,10 @@ select > option{
 
 p{
     padding: 10px;
+    margin-left: 10px;
 }
+
+h1.titulo{
+    margin-left: 21px;
+}
+

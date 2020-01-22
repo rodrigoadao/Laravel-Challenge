@@ -64,7 +64,6 @@
                 element.addEventListener('click',function(e){
                     e.preventDefault()
                     if(showMessage(msg)){
-                        console.log('testeShow')
                         window.location.href = element.href
                      }
                 })
@@ -120,20 +119,83 @@
     function selectAll(){
         var $checkAll = document.querySelector('[data-js="selectAll"]')
         var $check = document.querySelectorAll('[data-js="select"]')
-        $checkAll.addEventListener('click', function(e){
-            tableChecked($check)
+        if($checkAll){
+            $checkAll.addEventListener('change', function(e){
+                if($checkAll.checked === true){
+                    activeAll($check)
+                }else{
+                    desativeAll($check)
+                }
+            })
+        }
+
+
+        Array.prototype.forEach.call($check,function(element,index,array){
+            element.addEventListener('click',function(e){
+                toggleCheckIndividual(element)
+                var resultado = Array.prototype.some.call($check,function(element,index,array){
+                    return element.checked
+                })
+                if(!resultado)
+                    $checkAll.checked = false
+            })
         })
     }
 
-    function tableChecked(param){
+    function toggleCheckIndividual(param){
+        var $tr = param.closest('tr')
+        if(param.checked === true){
+            $tr.classList.add('checked')
+            $tr.classList.remove('unchecked')
+        }else{
+            $tr.classList.remove('checked')
+            $tr.classList.add('unchecked')
+        }      
+    }
+
+    function activeAll(param){
         Array.prototype.forEach.call(param,function(element,index,array){
-            element.toggleAttribute('checked')
             var $tr = element.closest('tr')
-            $tr.toggleAttribute('checked')
+            element.checked = true;
+            $tr.classList.add('checked')
+            $tr.classList.remove('unchecked')
         })
     }
 
+    function desativeAll(param){
+        Array.prototype.forEach.call(param,function(element,index,array){
+            var $tr = element.closest('tr')
+            element.checked = false;
+            $tr.classList.remove('checked')
+            $tr.classList.add('unchecked')
+        })
+    }
 
+    function gerarPDF(){
+        var $btnPdf = document.querySelector('[data-js="Pdf"]');
+        if($btnPdf){
+            $btnPdf.addEventListener('click',function(e){
+                var $check = document.querySelectorAll('[data-js="select"]')
+                if(!verifyChecked($check))
+                    return alert('Nenhum registro selecionado!')
+                window.print()
+            })
+        }
+    }   
+    
+    function verifyChecked(param){
+        return Array.prototype.some.call(param,function(element,index,array){
+            return element.checked
+        })
+    }
+
+    // document.onclick = function( e ){
+    //     myFunction();
+    // }
+       
+    // function myFunction() {
+    //     window.open("http://google.com.br", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=1, left=1, width=100, height=100px");
+    // }
 
     CPF()
     Data()
@@ -151,6 +213,8 @@
     formatarSalario()
     PesquisaSubmit()
     selectAll()
+    gerarPDF()
+
     
 }())
 

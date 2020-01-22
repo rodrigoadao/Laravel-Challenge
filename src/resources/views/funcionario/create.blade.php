@@ -52,7 +52,7 @@
                     <input type="text"  class="form-control"  data-js="cpf" maxlength="14" name="cpf" id="cpf" value="{{ old('cpf') }}">
                 </div>
                 <div class="col-4">
-                    <label for="dtNacimento">Data Nascimento: </label>
+                    <label for="dtNacimento">Data de Nascimento: </label>
                     <input type="text"  class="form-control" data-js="dtNasc" name="dtNacimento" id="dtNacimento" maxlength="10" value="{{ old('dtNacimento') }}">
                 </div>
             </div>
@@ -95,19 +95,19 @@
                 </div>
                 <div class="col-4">
                         <label for="password">Senha: </label>
-                        <input type="text"  class="form-control" name="password" id="password" value="1234">
+                        <input type="password"  class="form-control" name="password" id="password" value="1234">
                 </div>
             </div>
             <div class="row">
                 <div class="col-4 form-check">
-                    <input type="checkbox" id="situacao" name="situacao" value="1" >
+                    <input type="checkbox" id="situacao" name="situacao" checked value="1" >
                     <label class="form-check-label" for="situacao">Ativo</label>
                 </div>
             </div>
         </div>
         <div class="row justify-content-end mt-5">
             <div class="col-2 mr-3" >
-                <a href="{{ route('main') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('funcionario.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3 ">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>
