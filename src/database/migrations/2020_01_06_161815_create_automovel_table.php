@@ -20,7 +20,7 @@ class CreateAutomovelTable extends Migration
             $table->integer('ano');
             $table->string('modelo',150);
             $table->string('cor',50);
-            $table->bigInteger('chassi');
+            $table->string('chassi');
             $table->string('categoria',150);
             $table->timestamps();
 

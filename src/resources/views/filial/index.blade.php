@@ -37,7 +37,7 @@
     <div class="col-6">
       <form class="form-inline"  data-js="formPesq" action="{{ route('filial.search') }}" method="POST">
         @csrf
-        <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" aria-label="Search">
+        <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" value="{{old("params")}}" aria-label="Search">
         <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
       </form>
     </div>
