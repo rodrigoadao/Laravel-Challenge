@@ -2,7 +2,6 @@
 
 @section('titulo','Visualizar Filial')
 
-
 @section('content')
     <div class="modal-content">
         <div class="form-group">

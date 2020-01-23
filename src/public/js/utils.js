@@ -19,7 +19,7 @@
         var $titleModal = document.querySelector('[data-js="modal-title"]')
         $bodyModal.innerHTML = msg
         $titleModal.innerHTML = title
-        $modal.classList.add('show')
+        $modal.classList.add('show') 
         $modal.style.display = 'block'
         fecharModal($modal)
     }
