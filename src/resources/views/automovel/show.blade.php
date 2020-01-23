@@ -7,7 +7,6 @@
     <div class="modal-content">
         <div class="form-group">
             <h1 class="title-pg"><b>{{$automovel->nome}}</b></h1>
-            <p><b>ID: </b> {{$automovel->id}} </p>
             <p><b>Nome: </b>  {{$automovel->nome}} </p>
             <p><b>Ano: </b>  {{$automovel->ano}} </p>
             <p><b>Modelo: </b> {{$automovel->modelo}} </p>

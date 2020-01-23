@@ -56,7 +56,7 @@
                     <input type="text"  class="form-control" name="endereco" id="endereco" value="{{old('endereco') }}">
                 </div>
                 <div class="col-md-4">
-                    <label for="ie">Insc. Estadual: </label>
+                    <label for="ie">Inscrição Estadual: </label>
                     <input type="text" data-js="ie" class="form-control" data-js="ie" name="ie" maxlength="10" id="estado" value="{{ old('ie') }}">
                 </div>
             </div>
@@ -69,7 +69,7 @@
         </div>
         <div class="row justify-content-end">
             <div class="col-2 mr-3">
-                <a href="{{ route('main') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('filial.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3 ">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>
@@ -83,4 +83,9 @@
 @endpush
 @push('scripts')
     <script src="{{ asset('js/utils.js') }}"></script>
+    <script>
+        jQuery(function($){
+          $('#cnpj').mask('00.000.000/0000-00', {reverse: true})
+        })
+      </script>
 @endpush

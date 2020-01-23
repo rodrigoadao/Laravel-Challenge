@@ -54,11 +54,11 @@
                 </div>
                 <div class="col-4">
                     <label for="ano">Ano: </label>
-                    <input type="text"  class="form-control" name="ano" id="ano" maxlength="4" value="{{ old('ano') }}">
+                    <input type="text" data-js="ano" class="form-control" name="ano" id="ano" maxlength="4" value="{{ old('ano') }}">
                 </div>
                 <div class="col-4">
                     <label for="modelo">Modelo: </label>
-                    <input type="text"  class="form-control" maxlength="4" name="modelo" id="modelo" value="{{ old('modelo') }}">
+                    <input type="text"  data-js="modelo" class="form-control" maxlength="4" name="modelo" id="modelo" value="{{ old('modelo') }}">
                 </div>
             </div>
             <div class="row mt-4">
@@ -100,7 +100,7 @@
         </div>
         <div class="row justify-content-md-end">
             <div class="col-2 mr-3">
-                <a href="{{ route('main') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
+                <a href="{{ route('automovel.index') }}" type="submit" class="btn btn-sucess form-control">Cancelar</a>
             </div>
             <div class="col-2 mr-3">
                 <button type="submit" class="btn btn-sucess form-control">Salvar</button>
@@ -111,4 +111,7 @@
 @endsection
 @push('styles')
     <link href="/css/create.css" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endpush

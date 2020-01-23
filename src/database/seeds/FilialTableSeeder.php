@@ -17,7 +17,7 @@ class FilialTableSeeder extends Seeder
             'nome' => 'Filial Principal',
             'endereco' => 'Rua dos Anjos nº 0',
             'ie' => 88888888,
-            'cnpj' => '999999999999'
+            'cnpj' => '999.999/9999-99'
         ]);
     }
 }

@@ -44,6 +44,7 @@ class FuncionarioController extends Controller
         return redirect()->route('login');
     }
     public function postLogin(Request $request){
+
         $validator = validator($request->all(), ['password' => 'required|min:5|numeric']);
         if($validator->fails()){
             return redirect()->route('login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
@@ -51,7 +52,7 @@ class FuncionarioController extends Controller
         $cpf = $request->input('cpf');
         $password = $request->input('password');
         
-        $credentials = ['cpf' => $cpf, 'password' => $password];
+        $credentials = ['cpf' => $cpf, 'password' => $password, 'situacao' => 1];
         if( Auth::guard('funcionario')->attempt($credentials) ){
             return view('main');
         } else{
@@ -59,13 +60,19 @@ class FuncionarioController extends Controller
         }
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $funcionarios = Funcionario::paginate($this->totalPage);
         $title = 'Listagem dos Funcionários';
         return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
     }
 
+    public function search(Request $request){
+        $dataQuery = $request->all();
+        $funcionarios = Funcionario::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        $title = 'Listagem dos Funcionários';
+        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -90,10 +97,11 @@ class FuncionarioController extends Controller
 
         $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
         $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
-        $dataForm['salario'] = $dataForm['hiddensalario'];
 
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
+
         $dataForm['password'] = Hash::make($dataForm['password']);
+        $dataForm['salario'] = str_replace(array(".",","),'',$dataForm['salario']);
 
         $insert = $this->funcionario->create($dataForm);
         if($insert)
@@ -142,10 +150,14 @@ class FuncionarioController extends Controller
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
 
+        $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
+        $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
+
         $dataForm['password'] == null ? $password = $funcionario->password :
         $password = Hash::make($dataForm['password']);
         $dataForm['password'] = $password;
 
+        $dataForm['salario'] = str_replace(array(".",","),'',$dataForm['salario']);
         $update = $funcionario->update($dataForm);
         if( $update )
             return redirect()->route('funcionario.index');
