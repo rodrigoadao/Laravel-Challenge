@@ -30,7 +30,7 @@ class FuncionarioEditRequest extends FormRequest
             'sexo'         => 'required|numeric',
             'cpf'          => 'required|min:14',
             'cargo'        => 'required|max:20|min:3',
-            'salario'      => 'required|numeric',
+            'salario'      => 'required',
             'filial_id'    => 'required'
         ];
     }

@@ -54,11 +54,11 @@
                 </div>
                 <div class="col-4">
                     <label for="ano">Ano: </label>
-                    <input type="text"  class="form-control" name="ano" id="ano" maxlength="4" value="{{ old('ano') }}">
+                    <input type="text" data-js="ano" class="form-control" name="ano" id="ano" maxlength="4" value="{{ old('ano') }}">
                 </div>
                 <div class="col-4">
                     <label for="modelo">Modelo: </label>
-                    <input type="text"  class="form-control" maxlength="4" name="modelo" id="modelo" value="{{ old('modelo') }}">
+                    <input type="text"  data-js="modelo" class="form-control" maxlength="4" name="modelo" id="modelo" value="{{ old('modelo') }}">
                 </div>
             </div>
             <div class="row mt-4">
@@ -111,4 +111,7 @@
 @endsection
 @push('styles')
     <link href="/css/create.css" rel="stylesheet" type="text/css">
+@endpush
+@push('scripts')
+    <script src="{{ asset('js/utils.js') }}"></script>
 @endpush

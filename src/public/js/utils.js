@@ -150,10 +150,10 @@
         }
     } 
 
-    function somenteNumeros() {
-        var $password = document.querySelector('[data-js="password"]')
-        if($password){
-            $password.addEventListener('keypress',(e) => {
+    function somenteNumeros(input) {
+        var $input = document.querySelector(input)
+        if($input){
+            $input.addEventListener('keypress',(e) => {
                 var charCode = e.charCode ? e.charCode : e.keyCode;
                 if (charCode != 8 && charCode != 9) {
                     if (charCode < 48 || charCode > 57) {
@@ -172,10 +172,11 @@
     selectAll()
     gerarDocumento('[data-js="Pdf"]')
     gerarDocumento('[data-js="Excel"]')
-    somenteNumeros()
+    somenteNumeros('[data-js="password"]')
+    somenteNumeros('[data-js="ano"]')
+    somenteNumeros('[data-js="modelo"]')
 
 }())
-
 
 
 // function confirm(datajs,msg){

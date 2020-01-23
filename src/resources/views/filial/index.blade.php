@@ -33,7 +33,7 @@
     </div>
   </div>
   <!-- END Modal -->
-  <div class="row justify-content-end my-3">
+  <div class="row justify-content-end my-3 search">
     <div class="col-6">
       <form class="form-inline"  data-js="formPesq" action="{{ route('filial.search') }}" method="POST">
         @csrf
@@ -49,21 +49,23 @@
   <table class="table">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Nome</th>
-          <th class="hcenter" scope="col">Endereço</th>
-          <th class="hcenter" scope="col">IE</th>
-          <th class="hcenter" scope="col">CNPJ</th>
-          <th class="hcenter" scope="col">Ações</th>
+          <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
+          <th class="nome width-30"    scope="col ">Nome</th>
+          <th class="hcenter width-20" scope="col">Endereço</th>
+          <th class="hcenter width-20" scope="col">IE</th>
+          <th class="hcenter width-15" scope="col">CNPJ</th>
+          <th class="hcenter acoes width-15" scope="col">Ações</th>
         </tr>
       </thead>
       <tbody>
         @foreach ( $filiais as $filial )
-          <tr row >
+          <tr row class="unchecked">
+            <td class="check"><input type="checkbox" data-js="select" class="select" id=""></td>
             <td>{{ $filial->nome }}</td>
             <td class="hcenter" >{{ $filial->endereco}}</td>
             <td class="hcenter" >{{ $filial->ie }}</td>
             <td class="hcenter" >{{ $filial->cnpj }}</td>
-            <td class="img-commands hcenter">
+            <td class="img-commandsFunc hcenter">
               <form class="form-inline" action="" data-js="formActions">
                 <a href="{{ route('filial.show', $filial->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
                 <a href="{{ route('filial.edit', $filial->id ) }}"><img src="../img/update.svg" title="alterar"></a>
@@ -76,6 +78,14 @@
     </table>
     <div class="paginacao">
       {!! $filiais->links() !!}
+    </div>
+    <div class="row justify-content-end">
+      <div>
+        <button data-js="Excel" class="btn btn-sucess form-control exportar" value="Excel" type="submit">Exportar Excel</button>
+      </div>
+      <div>
+        <button data-js="Pdf" class="btn btn-sucess form-control exportar"  value="Pdf" type="submit">Exportar PDF</button>
+      </div>
     </div>
 </div>
 @endsection

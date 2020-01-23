@@ -97,10 +97,11 @@ class FuncionarioController extends Controller
 
         $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
         $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
-        $dataForm['salario'] = $dataForm['hiddensalario'];
 
         $dataForm['situacao'] = ( !isset($dataForm['situacao']) ) ? 0 : 1;
+
         $dataForm['password'] = Hash::make($dataForm['password']);
+        $dataForm['salario'] = str_replace(array(".",","),'',$dataForm['salario']);
 
         $insert = $this->funcionario->create($dataForm);
         if($insert)
@@ -149,10 +150,14 @@ class FuncionarioController extends Controller
         $dataForm = $request->all();
         $funcionario = $this->funcionario->find($id);
 
+        $dataForm['dtNacimento'] = str_replace('/','-', $dataForm['dtNacimento']);
+        $dataForm['dtNacimento'] = date('Y-m-d',strtotime($dataForm['dtNacimento']));
+
         $dataForm['password'] == null ? $password = $funcionario->password :
         $password = Hash::make($dataForm['password']);
         $dataForm['password'] = $password;
 
+        $dataForm['salario'] = str_replace(array(".",","),'',$dataForm['salario']);
         $update = $funcionario->update($dataForm);
         if( $update )
             return redirect()->route('funcionario.index');
