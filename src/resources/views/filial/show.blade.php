@@ -19,6 +19,9 @@
         </div> 
     </div>
 @endsection
+@push('styles')
+    <link href="/css/create.css" rel="stylesheet" type="text/css">
+@endpush
 @push('scripts')
     <script src="{{ asset('js/utils.js') }}"></script>
     <script>
