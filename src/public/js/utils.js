@@ -1,47 +1,5 @@
 (function(){
     'use strict';
-    function CPF(){
-        var $cpf = document.querySelector('[data-js="cpf"]')
-        if($cpf){
-            $cpf.addEventListener('input',function(e){
-                $cpf.value = formatarCPF($cpf.value)
-            })
-            function formatarCPF(cpf){
-                var newCPF
-                newCPF = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,"$1.$2.$3-$4")   
-                return newCPF
-           }
-        }
-    }
-
-    // function Data($data){
-    //     var $data = document.querySelector('[data-js="dtNasc"]')
-    //     if($data){
-    //         $data.addEventListener('input',function(e){
-    //             $data.value = formatarData($data.value)
-    //         })
-    //         function formatarData(data){
-    //             var newDATA
-    //             newDATA = data.replace(/(\d{2})(\d{2})(\d{4})/,"$1/$2/$3")
-    //             return newDATA
-    //         }
-    //     }
-    // }
-
-    function CNPJ($CNPJ){
-        var $CNPJ = document.querySelector('[data-js="cnpj"]')
-        if($CNPJ){
-            $CNPJ.addEventListener('input',function(e){
-                $CNPJ.value = formatarCNPJ($CNPJ.value)
-            })
-            function formatarCNPJ(cnpj){
-                var newCNPJ
-                newCNPJ = cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/,"$1.$2.$3/$4-$5")
-                return newCNPJ
-            }
-        }
-    }
-
     function InscricaoEstadual($IE){
         var $IE = document.querySelector('[data-js="ie"]')
         if($IE){
@@ -107,38 +65,6 @@
         exibirModal($modal,msg,title)
     }
     
-
-    function apenasNumeros(datajs,){
-        var $input = document.querySelector(datajs)
-        var regex = new RegExp(/^[0-9.]+/)
-        if($input){
-            $input.addEventListener('input',function(e){
-                if(!regex.test(e.data)){
-                    var index = $input.value.length -1
-                    $input.value = $input.value.replace($input.value.charAt(index),'')
-                }
-                    
-            })
-        }
-    }
-
-    // function formatarSalario(){
-    //     var $salario = document.querySelector('[data-js="salario"]')
-    //     var $hidden = document.querySelector('[data-js="hiddensalario"]')
-    //     if($salario){
-    //         $salario.addEventListener('change',function(e){
-    //             console.log()
-    //             var regex = new RegExp(/\D+/g)
-    //             $hidden.value = e.target.value.replace(regex,'')
-    //             $salario.value = arraySalario($hidden.value)
-    //         })
-    //     }
-    // }
-
-    // function arraySalario(valores){
-    //     return (( new Number(valores)).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'}))
-    // }
-
     function PesquisaSubmit(){
         var $button = document.querySelector('[data-js="imgSubmit"]')
         var $form = document.querySelector('[data-js="formPesq"]')
@@ -202,8 +128,6 @@
         })
     }
 
-    
-
     function verifyChecked(param){
         return Array.prototype.some.call(param,function(element,index,array){
             return element.checked
@@ -226,29 +150,30 @@
         }
     } 
 
+    function somenteNumeros() {
+        var $password = document.querySelector('[data-js="password"]')
+        if($password){
+            $password.addEventListener('keypress',(e) => {
+                var charCode = e.charCode ? e.charCode : e.keyCode;
+                if (charCode != 8 && charCode != 9) {
+                    if (charCode < 48 || charCode > 57) {
+                        e.preventDefault();
+                    }
+                }
+            })
+        }
+    }
 
-
-    CPF()
-    //Data()
-    CNPJ()
     InscricaoEstadual()
     confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')
     confirmModal('[data-js="active"]','Deseja ativar este registro?','Ativando registro')
     confirmModal('[data-js="disable"]','Deseja desativar este registro?','Desativando registro!')
-    apenasNumeros('[data-js="cpf"]')
-    apenasNumeros('[data-js="dtNasc"]')
-    apenasNumeros('[data-js="hiddensalario"')
-    apenasNumeros('[data-js="salario"]')
-    apenasNumeros('[data-js="cnpj"]')
-    apenasNumeros('[data-js="ie"]')
-    formatarSalario()
     PesquisaSubmit()
     selectAll()
     gerarDocumento('[data-js="Pdf"]')
     gerarDocumento('[data-js="Excel"]')
+    somenteNumeros()
 
-    
-    
 }())
 
 

@@ -44,6 +44,7 @@ class FuncionarioController extends Controller
         return redirect()->route('login');
     }
     public function postLogin(Request $request){
+
         $validator = validator($request->all(), ['password' => 'required|min:5|numeric']);
         if($validator->fails()){
             return redirect()->route('login')->withErrors(['errors' => 'Erro ao efetuar login'])->withInput();
@@ -51,7 +52,7 @@ class FuncionarioController extends Controller
         $cpf = $request->input('cpf');
         $password = $request->input('password');
         
-        $credentials = ['cpf' => $cpf, 'password' => $password];
+        $credentials = ['cpf' => $cpf, 'password' => $password, 'situacao' => 1];
         if( Auth::guard('funcionario')->attempt($credentials) ){
             return view('main');
         } else{
