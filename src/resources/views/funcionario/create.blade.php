@@ -88,7 +88,7 @@
                         <option></option>
                         @foreach ($filiais as $filial)
                         <option value="{{ $filial->id }}"
-                            @if ( old('filial_id'))
+                            @if ( old('filial_id') == $filial->id)
                                 selected
                             @endif
                             >{{ $filial->nome }}</option>
