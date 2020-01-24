@@ -27,7 +27,7 @@ class FilialFormRequest extends FormRequest
             'nome'      => 'required|min:3|max:100',
             'endereco'  => 'required|min:3|max:100',
             'ie'        => 'required|numeric',
-            'cnpj'      => 'required|numeric'
+            'cnpj'      => 'required|min:18'
         ];
     }
 
@@ -40,7 +40,7 @@ class FilialFormRequest extends FormRequest
             'ie.required'       => 'O campo inscrição estadual é de preenchimento obrigatório.',
             'ie.numeric'        => 'Inscrição estadual inválida.',
             'cnpj.required'     => 'O campo cnpj é de preenchimento obrigatório.',
-            'cnpj.numeric'      => 'Cnpj inválido.'
+            'cnpj.min'          => 'Cnpj inválido.'
         ];
     }
 }

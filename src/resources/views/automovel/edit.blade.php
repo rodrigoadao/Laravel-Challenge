@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-4">
                     <label for="chassi">Numero Chassi: </label>
-                    <input type="text"  class="form-control" maxlength="14" name="chassi" id="chassi" value="{{ $automovel->chassi ?? old('chassi') }}">
+                    <input type="text"  class="form-control" maxlength="17" name="chassi" id="chassi" value="{{ $automovel->chassi ?? old('chassi') }}">
                 </div>
                 <div class="col-4">
                     <label for="categoria">Categoria: </label>

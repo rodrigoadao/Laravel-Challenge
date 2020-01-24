@@ -80,11 +80,13 @@ div .paginacao > nav {
     color: black;
 }
 
-td > img{
+td img:hover{
     transition: all 0.45s ease;
+    filter:  drop-shadow(2px 2px 2px black);
 }
-td > img:hover{
-   filter:  drop-shadow(2px 2px 2px black);
+
+.wrap-form {
+    width: 100%;
 }
 
 
