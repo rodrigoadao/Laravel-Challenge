@@ -69,9 +69,10 @@ class FuncionarioController extends Controller
 
     public function search(Request $request){
         $dataQuery = $request->all();
-        $funcionarios = Funcionario::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        $parametro = $dataQuery['params'];
+        $funcionarios = Funcionario::where('nome','like',"%{$parametro}%")->paginate($this->totalPage);
         $title = 'Listagem dos Funcionários';
-        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title'));
+        return view('funcionario.index', ['funcionarios' => $funcionarios], compact('title','parametro'));
     }
     /**
      * Show the form for creating a new resource.

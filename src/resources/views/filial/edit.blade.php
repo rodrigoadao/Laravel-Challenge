@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="ie">Insc. Estadual: </label>
-                    <input type="text" data-js="ie" class="form-control" data-js="ie" name="ie" maxlength="10" id="estado" value="{{ $filial->ie ?? old('ie') }}">
+                    <input type="text" data-js="ie" class="form-control" data-js="ie" name="ie" maxlength="9" id="estado" value="{{ $filial->ie ?? old('ie') }}">
                 </div>
             </div>
             <div class="row mt-4">

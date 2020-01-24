@@ -164,7 +164,7 @@
         }
     }
 
-    InscricaoEstadual()
+    //InscricaoEstadual()
     confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')
     confirmModal('[data-js="active"]','Deseja ativar este registro?','Ativando registro')
     confirmModal('[data-js="disable"]','Deseja desativar este registro?','Desativando registro!')
@@ -175,6 +175,7 @@
     somenteNumeros('[data-js="password"]')
     somenteNumeros('[data-js="ano"]')
     somenteNumeros('[data-js="modelo"]')
+    somenteNumeros('[data-js="ie"]')
 
 }())
 

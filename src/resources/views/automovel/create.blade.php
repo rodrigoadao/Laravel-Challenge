@@ -68,17 +68,17 @@
                 </div>
                 <div class="col-4">
                     <label for="chassi">Numero Chassi: </label>
-                    <input type="text"  class="form-control" maxlength="14" name="chassi" id="chassi" value="{{ old('chassi') }}">
+                    <input type="text"  class="form-control" maxlength="17" name="chassi" id="chassi" value="{{ old('chassi') }}">
                 </div>
                 <div class="col-4">
                     <label for="categoria">Categoria: </label>
-                    <select name="categoria"  class="form-control" id="categoria">
+                    <select name="categoria" class="form-control" id="categoria">
                         <option></option>
                         @foreach ($categorias as $categoria)
                             <option value="{{ $categoria }}"
-                                @if ( isset($automovel) && $automovel->categoria == $categoria)
-                                    selected
-                                @endif
+                            @if ( old('categoria') == $categoria)
+                                selected
+                            @endif
                             >{{ $categoria }}</option>
                         @endforeach
                     </select>
@@ -89,8 +89,8 @@
                         <option></option>
                         @foreach ($filiais as $filial)
                             <option value="{{ $filial->id }}"
-                                @if ( isset($automovel) && $automovel->filial_id == $filial->id)
-                                    selected
+                                @if ( old('filial_id') == $filial->id)
+                                selected
                                 @endif
                                 >{{ $filial->nome }}</option>
                         @endforeach

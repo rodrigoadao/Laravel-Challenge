@@ -1,29 +1,33 @@
 @extends('painel')
 
 @section('titulo','Filiais Cadastradas')
-{{-- @if ( isset($errors) && count($errors) > 0)
-<div class="alert alert-danger">
-    @foreach ( $errors->all() as $error)
-        <p>{{ $error }}</p>
-    @endforeach
-</div>
-@endif --}}
-
-
 @section('content')
+@if ( isset($errors) && count($errors) > 0)
+    <script>
+        $(document).ready(function() {
+            $('#modalExemplo').modal('show');
+        })
+    </script>
+@endif
 <div class="modal-content">
   <!-- Modal -->
-  <div class="modal fade" data-js="modal" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" data-js="modal" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="modalExemplo" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content" >
         <div class="modal-header" >
-          <h4 class="modal-title" style="margin-left: 25%" data-js="modal-title"  id="exampleModalLabel"></h4>
+          <h4 class="modal-title" style="margin-left: 25%" data-js="modal-title"  id="modalExemplo"></h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body" data-js="modal-body">
-          
+          <div class="alert alert-danger">
+            <p>
+            @foreach ( $errors->all() as $error)
+                {{ $error }} <br><br>
+            @endforeach
+            </p>
+        </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-js="btnFechar" data-dismiss="modal">Fechar</button>
@@ -37,7 +41,7 @@
     <div class="col-6">
       <form class="form-inline"  data-js="formPesq" action="{{ route('filial.search') }}" method="POST">
         @csrf
-        <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" value="{{old("params")}}" aria-label="Search">
+        <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" aria-label="Search" value="{{ $parametro ?? ''}}">
         <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
       </form>
     </div>
@@ -50,11 +54,11 @@
       <thead class="table-dark">
         <tr>
           <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
-          <th class="nome width-30"    scope="col ">Nome</th>
-          <th class="hcenter width-20" scope="col">Endereço</th>
-          <th class="hcenter width-20" scope="col">IE</th>
-          <th class="hcenter width-15" scope="col">CNPJ</th>
-          <th class="hcenter acoes width-15" scope="col">Ações</th>
+          <th class="nome width-25"    scope="col ">NOME</th>
+          <th class="hcenter width-20" scope="col">ENDEREÇO</th>
+          <th class="hcenter width-15" scope="col">IE</th>
+          <th class="hcenter width-20" scope="col">CNPJ</th>
+          <th class="hcenter acoes width-20" scope="col">AÇÕES</th>
         </tr>
       </thead>
       <tbody>
@@ -67,9 +71,11 @@
             <td class="hcenter" >{{ $filial->cnpj }}</td>
             <td class="img-commandsFunc hcenter">
               <form class="form-inline" action="" data-js="formActions">
-                <a href="{{ route('filial.show', $filial->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
-                <a href="{{ route('filial.edit', $filial->id ) }}"><img src="../img/update.svg" title="alterar"></a>
-                <a data-js="delete" href="{{ route('filial.delete', $filial->id) }}"><img src="../img/delete.svg" title="deletar"></a>
+                <div class="wrap-form hcenter">
+                  <a href="{{ route('filial.show', $filial->id ) }}"><img src="../img/view.svg" title="Visualizar"></a>
+                  <a href="{{ route('filial.edit', $filial->id ) }}"><img src="../img/update.svg" title="Alterar"></a>
+                  <a data-js="delete" href="{{ route('filial.delete', $filial->id) }}"><img src="../img/delete.svg" title="Deletar"></a>
+                </div>  
               </form>
             </td>
           </tr>

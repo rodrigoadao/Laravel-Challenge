@@ -29,9 +29,10 @@ class AutomovelController extends Controller
 
     public function search(Request $request){
         $dataQuery = $request->all();
-        $automoveis = Automovel::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
+        $parametro = $dataQuery['params'];
+        $automoveis = Automovel::where('nome','like',"%{$parametro}%")->paginate($this->totalPage);
         $title = 'Listagem dos Automovéis';
-        return view('automovel.index', ['automoveis' => $automoveis], compact('title'));
+        return view('automovel.index', ['automoveis' => $automoveis], compact('title','parametro'));
     }
 
     public function show($id){

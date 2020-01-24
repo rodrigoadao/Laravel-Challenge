@@ -32,8 +32,9 @@ class FilialController extends Controller
 
     public function search(Request $request){
         $dataQuery = $request->all();
-        $filiais = Filial::where('nome','like',"%{$dataQuery['params']}%")->paginate($this->totalPage);
-        return view('filial.index', ['filiais' => $filiais]);
+        $parametro = $dataQuery['params'];
+        $filiais = Filial::where('nome','like',"%{$parametro}%")->paginate($this->totalPage);
+        return view('filial.index', ['filiais' => $filiais],compact('parametro'));
     }
 
     /**
@@ -56,7 +57,6 @@ class FilialController extends Controller
     public function store(FilialFormRequest $request)
     {
         $dataForm = $request->all();
-        
         $insert = $this->filial->create($dataForm);
         if($insert)
             return redirect()->route('filial.index');
@@ -104,7 +104,6 @@ class FilialController extends Controller
         $dataForm = $request->all();
         $filial = $this->filial->find($id);
         $update = $filial->update($dataForm);
-
         if( $update )
             return redirect()->route('filial.index');
         else

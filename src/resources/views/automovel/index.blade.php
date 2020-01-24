@@ -29,7 +29,7 @@
       <div class="col-6">
         <form class="form-inline"  data-js="formPesq" action="{{ route('automovel.search') }}" method="POST">
           @csrf
-          <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" aria-label="Search">
+          <input class="form-control mr-sm-2 col-8" name="params" type="search" placeholder="Pesquisar" aria-label="Search" value="{{ $parametro ?? ''}}">
           <img data-js='imgSubmit' class="botao" src="../img/pesquisar.svg" alt="">
         </form>
       </div>
@@ -42,13 +42,13 @@
         <thead class="table-dark">
           <tr>
             <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
-            <th class="nome width-25" scope="col">Nome</th>
-            <th class="hcenter width-10" scope="col">Ano</th>
-            <th class="hcenter width-10" scope="col">Modelo</th>
-            <th class="hcenter width-10" scope="col">Cor</th>
-            <th class="hcenter width-20" scope="col">Nº de chassi</th>
-            <th class="hcenter width-15" scope="col">Categoria</th>
-            <th class="hcenter acoes width-10" scope="col">Ações</th>
+            <th class="nome width-25" scope="col">NOME</th>
+            <th class="hcenter width-10" scope="col">ANO</th>
+            <th class="hcenter width-10" scope="col">MODELO</th>
+            <th class="hcenter width-10" scope="col">COR</th>
+            <th class="hcenter width-20" scope="col">Nº DE CHASSI</th>
+            <th class="hcenter width-10" scope="col">CATEGORIA</th>
+            <th class="hcenter acoes width-15" scope="col">AÇÕES</th>
           </tr>
         </thead>
         <tbody>
@@ -63,9 +63,11 @@
                 <td class="hcenter" >{{ $automovel->categoria }}</td>
                 <td class="img-commandsFunc hcenter">
                   <form class="form-inline" action="" data-js="formActions">
-                    <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" title="visualizar"></a>
-                    <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" title="alterar"></a>
-                    <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" title="deletar"></a>
+                    <div class="wrap-form hcenter">
+                      <a href="{{ route('automovel.show', $automovel->id ) }}"><img src="../img/view.svg" title="Visualizar"></a>
+                      <a href="{{ route('automovel.edit', $automovel->id ) }}"><img src="../img/update.svg" title="Alterar"></a>
+                      <a data-js="delete" href="{{ route('automovel.delete', $automovel->id) }}"><img src="../img/delete.svg" title="Deletar"></a>
+                    </div>
                   </form>
               </td>
               </tr>

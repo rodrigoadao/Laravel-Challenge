@@ -28,7 +28,7 @@ class AutomovelFormRequest extends FormRequest
             'ano'       => 'required|min:4',
             'modelo'    => 'required|min:4',
             'cor'       => 'required|min:3',
-            'chassi'    => 'required|min:14',
+            'chassi'    => 'required|min:17',
             'categoria' => 'required',
         ];
     }

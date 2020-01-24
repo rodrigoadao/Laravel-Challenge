@@ -24,13 +24,13 @@
             </button>
         </div>
         <div class="modal-body">
-                <div class="alert alert-danger">
-                    <p>
-                    @foreach ( $errors->all() as $error)
-                        {{ $error }} <br><br>
-                    @endforeach
-                    </p>
-                </div>
+            <div class="alert alert-danger">
+                <p>
+                @foreach ( $errors->all() as $error)
+                    {{ $error }} <br><br>
+                @endforeach
+                </p>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-sucess" data-dismiss="modal">Fechar</button>
@@ -67,17 +67,19 @@
                 </div> 
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
-                    <input type="text" data-js="salario" class="form-control" name="salario" id="salario" value="{{ old('salario') }}">
-                    <input type="hidden" name="hiddensalario" data-js="hiddensalario"  >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">R$</span>
+                        <input type="text"  class="form-control" name="salario" id="salario" value="{{ old('salario') }}" >
+                    </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-4">
                     <label for="sexo">Sexo:</label>
                     <select name="sexo" class="form-control" id="sexo">
-                        <option></option>
-                        <option value="0">Masculino</option>
-                        <option value="1">Feminino</option>
+                        <option value=""></option>
+                        <option value="0" {{ old('sexo') == '0' ? 'selected' : ''}}>Masculino</option>
+                        <option value="1" {{ old('sexo') == '1' ? 'selected' : ''}}>Feminino</option>
                     </select>
                 </div>
                 <div class="col-4">
@@ -86,7 +88,7 @@
                         <option></option>
                         @foreach ($filiais as $filial)
                         <option value="{{ $filial->id }}"
-                            @if ( isset($funcionario) && $funcionario->filial_id == $filial->id)
+                            @if ( old('filial_id') == $filial->id)
                                 selected
                             @endif
                             >{{ $filial->nome }}</option>
@@ -98,10 +100,10 @@
                         <input type="password"  data-js="password" class="form-control" name="password" id="password" value="1234">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4 form-check">
-                    <input type="checkbox" id="situacao" name="situacao" checked value="1" >
-                    <label class="form-check-label" for="situacao">Ativo</label>
+            <div class="row ml-1">
+                <div class="col-4 form-check custom-control custom-checkbox ">
+                    <input type="checkbox" id="situacao" class="custom-control-input" name="situacao" checked value="1" >
+                    <label class="custom-control-label" for="situacao">Ativo</label>
                 </div>
             </div>
         </div>
