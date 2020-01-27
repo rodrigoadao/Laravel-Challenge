@@ -12,7 +12,7 @@
             <p><b>Sexo:</b>  {{$funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }} </p>
             <p><b>CPF:</b> <span id="cpf"> {{$funcionario->cpf}} </span> </p>
             <p><b>Cargo:</b>  {{$funcionario->cargo}} </p>
-            <p><b>Salario: R$</b>  <span id="salario"> {{$funcionario->salario}} </span> </p>
+            <p><b>Salario:</b> R$ <span id="salario"> {{$funcionario->salario}} </span> </p>
             <p><b>Situação:</b>  {{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }} </p>
             <div class="row justify-content-end">
                 <div class="col-2 mr-3">

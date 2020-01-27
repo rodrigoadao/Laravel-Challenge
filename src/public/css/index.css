@@ -40,6 +40,9 @@ table img{
     text-align: center;
 }
 
+.table thead th{
+    vertical-align: middle;
+}
 table{
     width: 100%;
     border-left: 2px solid #2c2c2c;
@@ -125,6 +128,10 @@ td img:hover{
     font-size: 13px;
     padding: 5px;
     margin: 2px 15px;
+}
+
+.excel{
+    display: none;
 }
 
 element.style {

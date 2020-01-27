@@ -72,7 +72,6 @@ class FilialController extends Controller
      */
     public function show($id)
     {
-        //$filial = $this->filial->where('id',$id)->whereBetween('nome', '2020-15-02', 'asdasds')->get();
         $filial = $this->filial->find($id);
         $filial = Filial::find($id);
         $title = "Filial: {$filial->nome}";

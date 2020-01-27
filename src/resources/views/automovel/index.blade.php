@@ -79,10 +79,10 @@
     </div>
     <div class="row justify-content-end">
       <div>
-        <button data-js="Excel" class="btn btn-sucess form-control exportar" value="Excel" type="submit">Exportar Excel</button>
+        <button data-js="Excel" class="btn btn-sucess form-control exportar excel" value="Excel" type="submit">Exportar Excel</button>
       </div>
       <div>
-        <button data-js="Pdf" class="btn btn-sucess form-control exportar"  value="Pdf" type="submit">Exportar PDF</button>
+        <button data-js="Pdf" class="btn btn-sucess form-control exportar "  value="Pdf" type="submit">Exportar PDF</button>
       </div>
     </div>
 </div>

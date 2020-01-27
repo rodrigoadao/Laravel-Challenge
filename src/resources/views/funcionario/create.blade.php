@@ -67,8 +67,10 @@
                 </div> 
                 <div class="col-4">
                     <label for="salario">Sálario: </label>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">R$</span>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">R$</span>
+                        </div>
                         <input type="text"  class="form-control" name="salario" id="salario" value="{{ old('salario') }}" >
                     </div>
                 </div>

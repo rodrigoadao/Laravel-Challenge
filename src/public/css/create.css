@@ -43,6 +43,7 @@ select > option{
 
 .form-check{
    padding-top: 30px;
+
 }
 
 p{
@@ -54,3 +55,6 @@ h1.titulo{
     margin-left: 21px;
 }
 
+.custom-control-label{
+    padding-top: 4px;
+}
