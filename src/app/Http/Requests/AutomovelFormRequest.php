@@ -30,6 +30,7 @@ class AutomovelFormRequest extends FormRequest
             'cor'       => 'required|min:3',
             'chassi'    => 'required|min:17',
             'categoria' => 'required',
+            'filial_id' => 'required'
         ];
     }
 
@@ -45,7 +46,8 @@ class AutomovelFormRequest extends FormRequest
             'modelo.min'        => 'Modelo inválido.',
             'chassi.required'   => 'O campo chassi é de preenchimento obrigatório.',
             'chassi.min'        => 'Chassi inválido.',
-            'categoria.required'=> 'O campo categoria é de preenchimento obrigatório.'
+            'categoria.required'=> 'O campo categoria é de preenchimento obrigatório.',
+            'filial_id.required'=> 'O campo filial é de preenchimento obrigatório.'
         ];
     }
 }
