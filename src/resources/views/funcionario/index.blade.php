@@ -47,15 +47,16 @@
           <thead class="table-dark">
             <tr>
               <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
-              <th class="nome width-30" scope="col">NOME</th>
+              <th class="nome width-15" scope="col">NOME</th>
               {{-- <th class="hcenter width-10" scope="col">Data nascimento</th>
               <th class="hcenter width-10" scope="col">Sexo</th> --}}
               <th class="hcenter width-20" scope="col">CPF</th>
               {{-- <th class="hcenter width-10" scope="col">Endereço</th> --}}
               <th class="hcenter width-15" scope="col">CARGO</th>
               {{-- <th class="hcenter width-10" scope="col">Salário</th> --}}
-              <th class="hcenter width-15" scope="col">SITUAÇÃO</th>
-              <th class="hcenter acoes width-20" scope="col">AÇÕES</th>
+              <th class="hcenter width-10" scope="col">SITUAÇÃO</th>
+              <th class="hcenter width-15" scope="col">FILIAL</th>
+              <th class="hcenter acoes width-25" scope="col">AÇÕES</th>
             </tr>
           </thead>
           <tbody>
@@ -70,6 +71,7 @@
                 <td class="hcenter">{{ $funcionario->cargo }}</td>
                 {{-- <td>{{ $funcionario->salario }}</td> --}}
                 <td class="hcenter">{{ $funcionario->situacao == 0 ? 'Desativado' : 'Ativo' }}</td>
+                <td class="hcenter">{{ $funcionario->filial->nome }}</td>
                 <td class="img-commandsFunc">
                   <form class="form-inline" action="" data-js="formActions">
                     <div class="wrap-form hcenter">

@@ -14,7 +14,7 @@ class Funcionario extends Authenticatable
 
     public function filial()
     {
-        return $this->belongsTo('App\Models\Filial','filial_id1');
+        return $this->belongsTo('App\Models\Filial','filial_id');
     }
 
     protected $fillable = [

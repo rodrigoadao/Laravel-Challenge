@@ -42,13 +42,14 @@
         <thead class="table-dark">
           <tr>
             <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
-            <th class="nome width-25" scope="col">NOME</th>
+            <th class="nome width-17" scope="col">NOME</th>
             <th class="hcenter width-10" scope="col">ANO</th>
             <th class="hcenter width-10" scope="col">MODELO</th>
             <th class="hcenter width-10" scope="col">COR</th>
-            <th class="hcenter width-20" scope="col">Nº DE CHASSI</th>
+            <th class="hcenter width-10" scope="col">Nº DE CHASSI</th>
             <th class="hcenter width-10" scope="col">CATEGORIA</th>
-            <th class="hcenter acoes width-15" scope="col">AÇÕES</th>
+            <th class="hcenter width-15" scope="col">FILIAL</th>
+            <th class="hcenter acoes width-18" scope="col">AÇÕES</th>
           </tr>
         </thead>
         <tbody>
@@ -61,6 +62,7 @@
                 <td class="hcenter" >{{ $automovel->cor }}</td>
                 <td class="hcenter" >{{ $automovel->chassi }}</td>
                 <td class="hcenter" >{{ $automovel->categoria }}</td>
+                <td class="hcenter">{{ $automovel->filial->nome }}</td>
                 <td class="img-commandsFunc hcenter">
                   <form class="form-inline" action="" data-js="formActions">
                     <div class="wrap-form hcenter">
