@@ -6,6 +6,7 @@ use App\Http\Requests\FilialFormRequest;
 use App\Models\Filial;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use App\Models\Estado;
 
 class FilialController extends Controller
 {
@@ -15,12 +16,14 @@ class FilialController extends Controller
      * @return \Illuminate\Http\Response
      */
      protected $filial;
+     protected $estado;
      protected $request;
      private $totalPage = 5;
 
-     public function __construct(Filial $filial)
+     public function __construct(Filial $filial,Estado $estado)
      {
         $this->filial = $filial;
+        $this->estado = $estado;
      }
 
     public function index()
@@ -45,7 +48,8 @@ class FilialController extends Controller
     public function create()
     {
         $title = "Cadastrar Filial";
-        return view('filial.create',compact('title'));
+        $estados = $this->estado->all();
+        return view('filial.create',compact('title','estados'));
     }
 
     /**

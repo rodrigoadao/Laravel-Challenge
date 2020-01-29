@@ -164,6 +164,35 @@
         }
     }
 
+    function pesquisarEstado(){
+        var $estado = document.querySelector('[data-js="estado"]');
+        if($estado){
+            $estado.addEventListener('change', function(){
+                var id = $estado.value
+                var url = `../estado/${id}`
+                var objEstado = GetRequest(url)
+            })
+        }   
+    }
+
+    function setMaskEstado(estado){
+        var $IncricaoEstadual = document.querySelector('[data-js="ie"]')
+        if($IncricaoEstadual){
+            $($IncricaoEstadual).mask(estado.mask)   
+          }
+    }
+
+    function GetRequest(url){
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET',url)
+        xhr.send()
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                setMaskEstado(JSON.parse(xhr.responseText))
+            }
+        }
+    }
+
     //InscricaoEstadual()
     confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')
     confirmModal('[data-js="active"]','Deseja ativar este registro?','Ativando registro')
@@ -176,6 +205,8 @@
     somenteNumeros('[data-js="ano"]')
     somenteNumeros('[data-js="modelo"]')
     somenteNumeros('[data-js="ie"]')
+    pesquisarEstado()
+
 
 }())
 

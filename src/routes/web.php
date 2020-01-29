@@ -34,6 +34,9 @@ Route::group(['middleware' => 'funcionario'], function(){
         Route::post('funcionario/search','FuncionarioController@search')->name('funcionario.search');
         Route::post('automovel/search','AutomovelController@search')->name('automovel.search');
         Route::post('filial/search','FilialController@search')->name('filial.search');
+
+        // XMLHttpRequest
+        Route::get('estado/{id}','EstadoController@estado')->name('estado');
     });
 });
 
