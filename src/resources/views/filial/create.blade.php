@@ -56,14 +56,27 @@
                     <input type="text"  class="form-control" name="endereco" id="endereco" value="{{old('endereco') }}">
                 </div>
                 <div class="col-md-4">
-                    <label for="ie">Inscrição Estadual: </label>
-                    <input type="text" data-js="ie" class="form-control" data-js="ie" name="ie" maxlength="9" id="estado" value="{{ old('ie') }}">
+                    <label for="cnpj">CNPJ: </label>
+                    <input type="text" data-js="cnpj" class="form-control" name="cnpj" id="cnpj"  data-js="cnpj" maxlength="18"  value="{{ old('cnpj') }}">
                 </div>
             </div>
             <div class="row mt-4">
+                <div class="col-4">
+                    <label for="uf">Estado: </label>
+                    <select name="estado" data-js="estado" class="form-control" id="uf">
+                        <option></option>
+                        @foreach ($estados as $estado)
+                        <option value="{{ $estado->id }}"
+                            @if ( old('estado') == $estado->id)
+                                selected
+                            @endif
+                            >{{ $estado->uf }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-md-4">
-                    <label for="cnpj">CNPJ: </label>
-                    <input type="text" data-js="cnpj" class="form-control" name="cnpj" id="cnpj"  data-js="cnpj" maxlength="18"  value="{{ old('cnpj') }}">
+                    <label for="ie">Inscrição Estadual: </label>
+                    <input type="text" data-js="ie" class="form-control" data-mask="" name="ie" id="ie" value="{{ old('ie') }}" >
                 </div>
             </div>
         </div>
@@ -86,6 +99,7 @@
     <script>
         jQuery(function($){
           $('#cnpj').mask('00.000.000/0000-00', {reverse: true})
+          
         })
       </script>
 @endpush

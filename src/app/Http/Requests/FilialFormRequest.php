@@ -26,7 +26,7 @@ class FilialFormRequest extends FormRequest
         return [
             'nome'      => 'required|min:3|max:100',
             'endereco'  => 'required|min:3|max:100',
-            'ie'        => 'required|numeric',
+            'ie'        => 'required|min:8',
             'cnpj'      => 'required|min:18'
         ];
     }
@@ -38,7 +38,7 @@ class FilialFormRequest extends FormRequest
             'endereco.required' => 'O campo nome é de preenchimento obrigatório.',
             'endereco'          => 'Endereço inválido.',
             'ie.required'       => 'O campo inscrição estadual é de preenchimento obrigatório.',
-            'ie.numeric'        => 'Inscrição estadual inválida.',
+            'ie.min'        => 'Inscrição estadual inválida.',
             'cnpj.required'     => 'O campo cnpj é de preenchimento obrigatório.',
             'cnpj.min'          => 'Cnpj inválido.'
         ];
