@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Exports\AutomovelExport;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'funcionario'], function(){
@@ -35,10 +37,16 @@ Route::group(['middleware' => 'funcionario'], function(){
         Route::post('automovel/search','AutomovelController@search')->name('automovel.search');
         Route::post('filial/search','FilialController@search')->name('filial.search');
 
+        Route::post('download/automovel','AutomovelController@export')->name('funcionario.export');
+
         // XMLHttpRequest
         Route::get('estado/{id}','EstadoController@estado')->name('estado');
     });
 });
+
+Route::post('/download',function(){
+    return Excel::download(new AutomovelExport, 'automovel.xlsx');
+})->name('download.teste');
 
 
 

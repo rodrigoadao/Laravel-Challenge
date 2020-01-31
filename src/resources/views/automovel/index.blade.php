@@ -55,7 +55,7 @@
         <tbody>
           @foreach ( $automoveis as $automovel )
               <tr row class="unchecked" >
-                <td class="check"><input type="checkbox" data-js="select" class="select" id=""></td>
+                <td class="check"><input type="checkbox" data-js="select" value="{{$automovel->id}}" class="select"></td>
                 <td>{{ $automovel->nome }}</td>
                 <td class="hcenter" >{{ $automovel->ano}}</td>
                 <td class="hcenter" >{{ $automovel->modelo }}</td>
@@ -80,9 +80,11 @@
       {!! $automoveis->links() !!}
     </div>
     <div class="row justify-content-end">
-      <div>
-        <button data-js="Excel" class="btn btn-sucess form-control exportar excel" value="Excel" type="submit">Exportar Excel</button>
-      </div>
+      <form data-js="formIDs" action="{{route('download.teste')}}" method="POST">
+        @csrf
+        <input type="hidden" data-js="inputIds" name="ids" >
+        <button data-js="Excel" class="btn btn-sucess form-control exportar excel" type="submit">Exportar Excel</button>
+      </form>
       <div>
         <button data-js="Pdf" class="btn btn-sucess form-control exportar "  value="Pdf" type="submit">Exportar PDF</button>
       </div>

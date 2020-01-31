@@ -24,7 +24,7 @@
           <ul>
             <li><span>PAINEL ADMIN.</span></li>
           <li><a href="{{ route('funcionario.index') }}"><img src="/img/funcionario.svg">Funcionário</a></li>
-            <li><a href="{{ route('automovel.index') }}"><img src="/img/car.svg"> Automóvel</a></li>
+            <li><a href="{{ route('automovel.index') }}"><img src="/img/car.svg">Automóvel</a></li>
             <li><a href="{{ route('filial.index') }}"><img src="/img/filial.svg"> Filial</a></li>
             <hr>
             <li><a href="{{ route('funcionario.logout') }}"><img src="/img/exit.svg"> Sair</a></li>

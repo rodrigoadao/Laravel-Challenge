@@ -14,6 +14,7 @@
         }
     }
 
+
     function exibirModal($modal,msg,title){
         var $bodyModal = document.querySelector('[data-js="modal-body"]')
         var $titleModal = document.querySelector('[data-js="modal-title"]')
@@ -23,6 +24,8 @@
         $modal.style.display = 'block'
         fecharModal($modal)
     }
+
+    
 
     function confirmAction(element){
         var $actionConfirm = document.querySelector('[data-js="btnConfirm"]')
@@ -56,6 +59,10 @@
                 })
             })
         }
+    }
+
+    function teste(){
+        console.log('teste');
     }
 
     function alertModal(msg,title){
@@ -138,14 +145,33 @@
         window.print()
     }
 
+    function gerarExcel($check,csrf){
+        var $input = document.querySelector('[data-js="inputIds"]')
+        var $form = document.querySelector('[data-js="formIDs"]')
+
+        var $arrayCheck = Array.prototype.filter.call($check,function(inputcheck){
+                            return inputcheck.checked === true
+                        })
+        
+        var arrayCheckValues = Array.prototype.map.call($arrayCheck,function(inputcheck){
+                                return inputcheck.value
+                            })
+
+        $input.value = arrayCheckValues
+        $form.submit()
+        
+    }
+
     function gerarDocumento(btn){
         var $btn = document.querySelector(btn);
         if($btn){
             $btn.addEventListener('click',function(e){
+                e.preventDefault()
                 var $check = document.querySelectorAll('[data-js="select"]')
                 if(!verifyChecked($check))
                     return alertModal('Nenhum registro foi selecionado.','Erro ao gerar documento')
-                $btn.value === 'Pdf' ? gerarPDF()  : alert('vai ser implementado')
+                else
+                    $btn.value === 'Pdf' ? gerarPDF()  : gerarExcel($check,$btn.value)
             })
         }
     } 
@@ -170,7 +196,7 @@
             $estado.addEventListener('change', function(){
                 var id = $estado.value
                 var url = `../estado/${id}`
-                var objEstado = GetRequest(url)
+                GetRequest(url)
             })
         }   
     }
@@ -193,6 +219,19 @@
         }
     }
 
+    // function sendRequest(csrf,valores){
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("GET", 'download',true);
+    //     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    //     xhr.setRequestHeader('X-CSRF-TOKEN',csrf)
+    //     xhr.onreadystatechange = function() { 
+    //         if (xhr.readyState === 4) {
+    //           document.write(xhr.responseText)
+    //         }
+    //     }
+    //     xhr.send('valores='+JSON.stringify(valores));
+    // }
+
     //InscricaoEstadual()
     confirmModal('[data-js="delete"]','Deseja remover este registro?','Removendo registro')
     confirmModal('[data-js="active"]','Deseja ativar este registro?','Ativando registro')
@@ -209,22 +248,3 @@
 
 
 }())
-
-
-// function confirm(datajs,msg){
-//     var $btw = document.querySelectorAll(datajs);
-//     if($btw){
-//         Array.prototype.forEach.call($btw,function(element){
-//             console.log(element)
-//             element.addEventListener('click',function(e){
-//                 e.preventDefault()
-//                 if(showMessage(msg)){
-//                     window.location.href = element.href
-//                  }
-//             })
-//         })
-//     }
-// }
-// function showMessage(msg){
-//     return window.confirm(msg)
-// }

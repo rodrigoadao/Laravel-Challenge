@@ -113,7 +113,6 @@ class FilialController extends Controller
             return redirect()->route('filial.edit',$id)->with(['errors' => 'Falha ao editar']);
         
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -126,7 +125,7 @@ class FilialController extends Controller
             $filial = $this->filial->find($id);
             $delete = $filial->delete();
         } catch (QueryException $e) {
-            return redirect()->route('filial.index')->withErrors(['errors' => 'Essa Filial possuiu dados relacionados!']);
+            return redirect()->route('filial.index')->withErrors(['errors' => 'Essa Filial possui dados relacionados!']);
         }
         return redirect()->route('filial.index');
     }
