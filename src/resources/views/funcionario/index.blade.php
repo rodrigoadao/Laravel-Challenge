@@ -62,7 +62,7 @@
           <tbody>
             @foreach ( $funcionarios as $funcionario )
               <tr class="unchecked" row @if ($funcionario->situacao == 0 ) disable @endif>
-                <td class="check"><input type="checkbox" data-js="select" class="select" id=""></td>
+                <td class="check"><input type="checkbox" data-js="select" class="select" value="{{ $funcionario->id }}"></td>
                 <td>{{ $funcionario->nome }}</td>
                 {{-- <td>{{ \Carbon\Carbon::parse($funcionario->dtNacimento)->format('d/m/Y') }}</td>
                 <td>{{ $funcionario->sexo == 0 ? 'Masculino' : 'Feminino' }}</td> --}}
@@ -94,11 +94,13 @@
           {!! $funcionarios->links() !!}
         </div>
         <div class="row justify-content-end">
+          <form data-js="formIDs" action="{{route('download.funcionario')}}" method="POST">
+            @csrf
+            <input type="hidden" data-js="inputIds" name="ids" >
+            <button data-js="Excel" class="btn btn-sucess form-control exportar excel" type="submit">Exportar Excel</button>
+          </form>
           <div>
-            <button data-js="Excel" class="btn btn-sucess form-control exportar excel" value="Excel" type="submit">Exportar Excel</button>
-          </div>
-          <div>
-            <button data-js="Pdf" class="btn btn-sucess form-control exportar"  value="Pdf" type="submit">Exportar PDF</button>
+            <button data-js="Pdf" class="btn btn-sucess form-control exportar "  value="Pdf" type="submit">Exportar PDF</button>
           </div>
         </div>
   </div>

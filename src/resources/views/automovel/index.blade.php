@@ -42,20 +42,20 @@
         <thead class="table-dark">
           <tr>
             <th class="check hcenter"> <input type="checkbox" data-js="selectAll" class="selectAll" id=""></th>
-            <th class="nome width-17" scope="col">NOME</th>
+            <th class="nome width-20" scope="col">NOME</th>
             <th class="hcenter width-10" scope="col">ANO</th>
             <th class="hcenter width-10" scope="col">MODELO</th>
             <th class="hcenter width-10" scope="col">COR</th>
             <th class="hcenter width-10" scope="col">Nº DE CHASSI</th>
             <th class="hcenter width-10" scope="col">CATEGORIA</th>
-            <th class="hcenter width-15" scope="col">FILIAL</th>
-            <th class="hcenter acoes width-18" scope="col">AÇÕES</th>
+            <th class="hcenter width-10" scope="col">FILIAL</th>
+            <th class="hcenter acoes width-20" scope="col">AÇÕES</th>
           </tr>
         </thead>
         <tbody>
           @foreach ( $automoveis as $automovel )
               <tr row class="unchecked" >
-                <td class="check"><input type="checkbox" data-js="select" value="{{$automovel->id}}" class="select"></td>
+                <td class="check"><input type="checkbox" data-js="select" class="select" value="{{ $automovel->id }}"></td>
                 <td>{{ $automovel->nome }}</td>
                 <td class="hcenter" >{{ $automovel->ano}}</td>
                 <td class="hcenter" >{{ $automovel->modelo }}</td>
@@ -80,7 +80,7 @@
       {!! $automoveis->links() !!}
     </div>
     <div class="row justify-content-end">
-      <form data-js="formIDs" action="{{route('download.teste')}}" method="POST">
+      <form data-js="formIDs" action="{{route('download.automovel')}}" method="POST">
         @csrf
         <input type="hidden" data-js="inputIds" name="ids" >
         <button data-js="Excel" class="btn btn-sucess form-control exportar excel" type="submit">Exportar Excel</button>

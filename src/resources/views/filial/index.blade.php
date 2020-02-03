@@ -64,7 +64,7 @@
       <tbody>
         @foreach ( $filiais as $filial )
           <tr row class="unchecked">
-            <td class="check"><input type="checkbox" data-js="select" class="select" id=""></td>
+            <td class="check"><input type="checkbox" data-js="select" class="select" value="{{ $filial->id }}"></td>
             <td>{{ $filial->nome }}</td>
             <td class="hcenter" >{{ $filial->endereco}}</td>
             <td class="hcenter" >{{ $filial->ie }}</td>
@@ -86,11 +86,13 @@
       {!! $filiais->links() !!}
     </div>
     <div class="row justify-content-end">
+      <form data-js="formIDs" action="{{route('download.filial')}}" method="POST">
+        @csrf
+        <input type="hidden" data-js="inputIds" name="ids" >
+        <button data-js="Excel" class="btn btn-sucess form-control exportar excel" type="submit">Exportar Excel</button>
+      </form>
       <div>
-        <button data-js="Excel" class="btn btn-sucess form-control exportar excel" value="Excel" type="submit">Exportar Excel</button>
-      </div>
-      <div>
-        <button data-js="Pdf" class="btn btn-sucess form-control exportar"  value="Pdf" type="submit">Exportar PDF</button>
+        <button data-js="Pdf" class="btn btn-sucess form-control exportar "  value="Pdf" type="submit">Exportar PDF</button>
       </div>
     </div>
 </div>

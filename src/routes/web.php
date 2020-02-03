@@ -37,16 +37,20 @@ Route::group(['middleware' => 'funcionario'], function(){
         Route::post('automovel/search','AutomovelController@search')->name('automovel.search');
         Route::post('filial/search','FilialController@search')->name('filial.search');
 
-        Route::post('download/automovel','AutomovelController@export')->name('funcionario.export');
+        Route::post('/download/automovel','AutomovelController@export')->name('download.automovel');
+        Route::post('/download/filial','FilialController@export')->name('download.filial');
+        Route::post('/download/funcionario','FuncionarioController@export')->name('download.funcionario');
 
         // XMLHttpRequest
         Route::get('estado/{id}','EstadoController@estado')->name('estado');
     });
 });
 
-Route::post('/download',function(){
-    return Excel::download(new AutomovelExport, 'automovel.xlsx');
-})->name('download.teste');
+// Route::post('/download',function(){
+//     //return (new AutomovelExport(1))->download('automovel.xlsx');
+//     // $ids = explode(",",$_POST['ids']);
+//     // return Excel::download(new AutomovelExport($ids), 'automovel.xlsx');
+// })->name('download.teste');
 
 
 

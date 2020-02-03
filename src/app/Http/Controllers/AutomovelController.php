@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Automovel;
 use App\Models\Filial;
 use App\Exports\AutomovelExport;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class AutomovelController extends Controller
 {
@@ -93,9 +93,8 @@ class AutomovelController extends Controller
             return redirect()->route('automovel.index')->with(['errors' => 'Falha ao deletar']);
     }
 
-    // public function export(){
-        
-    //     $idRegistros = json_decode($_POST['valores']);
-    //     return $this->export->query();
-    // }
+    public function export(){
+        $ids = explode(',',$_POST['ids']);
+        return Excel::download(new AutomovelExport($ids), 'automoveis.xlsx');
+    }
 }
