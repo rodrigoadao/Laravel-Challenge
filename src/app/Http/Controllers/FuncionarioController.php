@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FuncionarioExport;
 use App\Http\Requests\FuncionarioFormRequest;
 use App\Http\Requests\FuncionarioEditRequest;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FuncionarioCreateRequest;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FuncionarioController extends Controller
 {
@@ -198,5 +200,10 @@ class FuncionarioController extends Controller
         else
             return redirect()->route('funcionario.index',$id)->with(['errors' => 'Não foi possível desativar']);
         
+    }
+
+    public function export(){
+        $ids = explode(',',$_POST['ids']);
+        return Excel::download(new FuncionarioExport($ids), 'funcionarios.xlsx');
     }
 }

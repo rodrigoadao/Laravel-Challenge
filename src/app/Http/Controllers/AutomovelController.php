@@ -6,17 +6,21 @@ use App\Http\Requests\AutomovelFormRequest;
 use Illuminate\Http\Request;
 use App\Models\Automovel;
 use App\Models\Filial;
+use App\Exports\AutomovelExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AutomovelController extends Controller
 {
     protected $filial;
     protected $automovel;
+    protected $export;
     private $totalPage = 5;
 
-    public function __construct(Automovel $automovel,Filial $filial)
+    public function __construct(Automovel $automovel,Filial $filial,AutomovelExport $export)
     {
         $this->filial = $filial;
         $this->automovel = $automovel;
+        $this->export = $export;
         // $this->middleware('auth')->only(['create','store']);
         // $this->middleware('auth')->except('index');
     }
@@ -87,5 +91,10 @@ class AutomovelController extends Controller
             return redirect()->route('automovel.index');
         else
             return redirect()->route('automovel.index')->with(['errors' => 'Falha ao deletar']);
+    }
+
+    public function export(){
+        $ids = explode(',',$_POST['ids']);
+        return Excel::download(new AutomovelExport($ids), 'automoveis.xlsx');
     }
 }

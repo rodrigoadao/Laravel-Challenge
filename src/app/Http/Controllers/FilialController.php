@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FilialExport;
 use App\Http\Requests\FilialFormRequest;
 use App\Models\Filial;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\Estado;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FilialController extends Controller
 {
@@ -113,7 +115,6 @@ class FilialController extends Controller
             return redirect()->route('filial.edit',$id)->with(['errors' => 'Falha ao editar']);
         
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -126,9 +127,14 @@ class FilialController extends Controller
             $filial = $this->filial->find($id);
             $delete = $filial->delete();
         } catch (QueryException $e) {
-            return redirect()->route('filial.index')->withErrors(['errors' => 'Essa Filial possuiu dados relacionados!']);
+            return redirect()->route('filial.index')->withErrors(['errors' => 'Essa Filial possui dados relacionados!']);
         }
         return redirect()->route('filial.index');
+    }
+
+    public function export(){
+        $ids = explode(',',$_POST['ids']);
+        return Excel::download(new FilialExport($ids), 'filiais.xlsx');
     }
 
 }
